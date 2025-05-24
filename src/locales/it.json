@@ -1,0 +1,12 @@
+{
+    "login": {
+      "title": "Accesso",
+      "email": "Email",
+      "password": "Password",
+      "show": "Mostra",
+      "hide": "Nascondi",
+      "submit": "Accedi",
+      "error": "Errore"
+    }
+  }
+  

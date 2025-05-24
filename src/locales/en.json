@@ -1,0 +1,12 @@
+{
+    "login": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "show": "Show",
+      "hide": "Hide",
+      "submit": "Sign in",
+      "error": "Error"
+    }
+  }
+  
