@@ -15,4 +15,4 @@ export default function AnimalDetails() {
       {/* Ajouter d'autres champs selon le modèle */}
     </div>
   )
-}
+} 
