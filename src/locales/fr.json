@@ -7,6 +7,64 @@
       "hide": "Masquer",
       "submit": "Se connecter",
       "error": "Erreur"
-    }
+    },
+  "access": {
+    "forbidden": "Accès interdit"
+  },
+  "button": {
+    "logout": "Déconnexion"
+  },
+  "page": {
+    "not_found": "Page introuvable"
+  },
+  "roles": {
+    "super_admin": "Super Administrateur",
+    "admin": "Administrateur",
+    "manager": "Manager",
+    "moderator": "Modérateur",
+    "provider": "Prestataire",
+    "support": "Support"
+  },
+  "button": {
+    "language": "Langue"
+  },
+  "page": {
+  "dashboard": "Tableau de bord",
+  "animals": "Animaux",
+  "users": "Utilisateurs"
+  },
+  "button": {
+    "add_animal": "Ajouter",
+    "edit": "Éditer",
+    "delete": "Supprimer"
+  },
+  "animal": {
+    "name": "Nom",
+    "species": "Espèce"
+  },
+  "table": {
+    "actions": "Actions"
+  },
+  "confirm": {
+    "delete": "Confirmer la suppression ?"
+  },
+  "animal": {
+    "name": "Nom",
+    "species": "Espèce",
+    "breed": "Race",
+    "sex": "Sexe",
+    "sex.male": "Mâle",
+    "sex.female": "Femelle",
+    "color": "Couleur",
+    "weight": "Poids",
+    "height": "Taille",
+    "status": "Statut",
+    "status.active": "Actif",
+    "status.lost": "Perdu",
+    "birthdate": "Date de naissance"
+  },
+  "button": {
+    "save": "Enregistrer"
   }
+}
   

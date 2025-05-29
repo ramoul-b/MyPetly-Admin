@@ -1,16 +1,16 @@
-import { ListItem, ListItemText, ListItemButton } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import useAuth from '../modules/auth/useAuth'
+import { ListItem, ListItemText } from '@mui/material'
 
-export default function SidebarItem ({ item, active }) {
+export default function SidebarItem ({ item, roles = [] }) {
+  const { roles: myRoles } = useAuth()
+
+  /* filtre sans fonction “is()” */
+  if (roles.length && !roles.some(r => myRoles.includes(r))) return null
+
   return (
-    <ListItem disablePadding>
-      <ListItemButton
-        component={Link}
-        to={item.path}
-        selected={active}
-      >
-        <ListItemText primary={item.label} />
-      </ListItemButton>
+    <ListItem component={NavLink} to={item.path} sx={{ textDecoration:'none' }}>
+      <ListItemText primary={item.label} />
     </ListItem>
   )
 }

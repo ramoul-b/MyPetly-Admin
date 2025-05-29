@@ -1,5 +1,7 @@
 // src/modules/auth/authApi.js
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { setCredentials, logout } from './authSlice'
+
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL ?? 'http://vps-88a3af89.vps.ovh.net:8081/api/v1',
@@ -13,14 +15,19 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithRefresh = async (args, api, extra) => {
   let result = await baseQuery(args, api, extra)
 
-  if (result.error?.status === 401) {
+  if (result.error?.status === 401 && args !== 'login') {
     // RE-TRY via /refresh-token
     const refresh = await baseQuery('refresh-token', api, extra)
+
     if (refresh.data?.access_token) {
+       
       localStorage.setItem('access_token', refresh.data.access_token)
+       
+      api.dispatch(setCredentials(refresh.data))
+       
       result = await baseQuery(args, api, extra)
     } else {
-      api.dispatch({ type: 'auth/logout' })
+      api.dispatch(logout())
     }
   }
   return result
@@ -38,5 +45,5 @@ export const authApi = createApi({
 })
 
 export const { useLoginMutation } = authApi
-export { baseQueryWithRefresh }         // ← ajoute ceci
+export { baseQueryWithRefresh }         
 

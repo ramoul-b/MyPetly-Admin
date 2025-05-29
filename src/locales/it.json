@@ -7,6 +7,64 @@
       "hide": "Nascondi",
       "submit": "Accedi",
       "error": "Errore"
-    }
+    },
+    "access": {
+    "forbidden": "Accesso negato"
+    },
+    "button": {
+      "logout": "Disconnetti"
+    },
+    "page": {
+      "not_found": "Pagina non trovata"
+    },
+    "roles": {
+    "super_admin": "Super Amministratore",
+    "admin": "Amministratore",
+    "manager": "Manager",
+    "moderator": "Moderatore",
+    "provider": "Fornitore",
+    "support": "Supporto"
+  },
+  "button": {
+    "language": "Lingua"
+  },
+  "page": {
+  "dashboard": "Dashboard",
+  "animals": "Animali",
+  "users": "Utenti"
+},
+  "button": {
+    "add_animal": "Aggiungi",
+    "edit": "Modifica",
+    "delete": "Elimina"
+  },
+  "animal": {
+    "name": "Nome",
+    "species": "Specie"
+  },
+  "table": {
+    "actions": "Azioni"
+  },
+  "confirm": {
+    "delete": "Confermi la cancellazione?"
+  },
+  "animal": {
+    "name": "Nom",
+    "species": "Espèce",
+    "breed": "Race",
+    "sex": "Sexe",
+    "sex.male": "Mâle",
+    "sex.female": "Femelle",
+    "color": "Couleur",
+    "weight": "Poids",
+    "height": "Taille",
+    "status": "Statut",
+    "status.active": "Actif",
+    "status.lost": "Perdu",
+    "birthdate": "Date de naissance"
+  },
+  "button": {
+    "save": "Enregistrer"
   }
+}
   

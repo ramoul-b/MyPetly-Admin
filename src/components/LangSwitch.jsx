@@ -8,7 +8,12 @@ export default function LangSwitch () {
       size="small"
       value={i18n.language}
       onChange={e => i18n.changeLanguage(e.target.value)}
-      sx={{ ml: 2 }}
+      sx={{
+    bgcolor: 'rgba(255,255,255,0.11)',
+    color: '#fff',
+    fontWeight: 600,
+    mr: 1
+  }}
     >
       <MenuItem value="fr">FR</MenuItem>
       <MenuItem value="en">EN</MenuItem>
