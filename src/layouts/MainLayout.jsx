@@ -55,7 +55,6 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
       >
         <Toolbar sx={{ justifyContent: 'center', py: 2 }}>
           <img src={LogoMyPetly} alt="Logo" width="100%" />
-
         </Toolbar>
         <List sx={{ mt: 2 }}>
           {menu.map(m => (
