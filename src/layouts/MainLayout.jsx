@@ -10,6 +10,7 @@ import LangSwitch from '../components/LangSwitch'
 import RoleBadge from '../components/RoleBadge'
 import { useTranslation } from 'react-i18next'
 import logout from '../modules/auth/logout'
+import LogoMyPetly from '../assets/LogoMyPetly.png'
 
 const drawerWidth = 220
 
@@ -53,7 +54,8 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
         }}
       >
         <Toolbar sx={{ justifyContent: 'center', py: 2 }}>
-          <img src="http://localhost:5173/src/assets/LogoMyPetly.png" alt="Logo" width="100%" />
+          <img src={LogoMyPetly} alt="Logo" width="100%" />
+
         </Toolbar>
         <List sx={{ mt: 2 }}>
           {menu.map(m => (

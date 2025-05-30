@@ -4,7 +4,7 @@ import { setCredentials, logout } from './authSlice'
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL ?? 'http://vps-88a3af89.vps.ovh.net:8081/api/v1',
+  baseUrl: import.meta.env.VITE_API_URL ?? 'https://app.mypetly.co/api/v1',
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('access_token')
     if (token) headers.set('authorization', `Bearer ${token}`)
