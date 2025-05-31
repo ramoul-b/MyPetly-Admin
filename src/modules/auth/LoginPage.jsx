@@ -20,15 +20,16 @@ export default function LoginPage () {
   const { t } = useTranslation()
   
   const onSubmit = async (data) => {
-    try {
-      await login(data).unwrap()
-      const from = loc.state?.from?.pathname || '/'
-      nav(from, { replace: true })
-    } catch (e) {
-      const msg = e?.data?.message || e?.error || 'Erreur inconnue'
-      setError(msg)
-    }
+  try {
+    await login(data).unwrap()
+    const from = loc.state?.from?.pathname || '/'
+    nav(from, { replace: true })
+  } catch (e) {
+    const msg = e?.data?.message || e?.error || 'Erreur inconnue'
+    setError(msg)
   }
+}
+
 
   return (
     <Box

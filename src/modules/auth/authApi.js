@@ -39,13 +39,24 @@ export const authApi = createApi({
   baseQuery: baseQueryWithRefresh,
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: (body) => ({ url: 'login', method: 'POST', body })
+      query: (body) => ({ url: 'login', method: 'POST', body }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          localStorage.setItem('access_token', data.access_token)
+          // Optionnel : api.dispatch(setCredentials(data))
+        } catch (e) {
+          // ignore (login échoué)
+        }
+      }
     }),
     refresh: builder.mutation({
       query: () => ({ url: 'refresh-token', method: 'POST' })
     })
   })
 })
+
+
 
 export const { useLoginMutation } = authApi
 export { baseQueryWithRefresh } 
