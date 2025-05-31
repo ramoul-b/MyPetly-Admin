@@ -32,7 +32,7 @@ const baseQueryWithRefresh = async (args, api, extra) => {
     }
   }
   return result
-} 
+}
 
 export const authApi = createApi({
   reducerPath: 'authApi',
