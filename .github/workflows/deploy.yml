@@ -23,6 +23,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Add SSH key fingerprint to known_hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts      
+
     - name: Build app
       run: npm run build
 
