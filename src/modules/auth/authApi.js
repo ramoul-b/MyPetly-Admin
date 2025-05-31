@@ -2,7 +2,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logout } from './authSlice'
 
-
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL ?? 'https://api.mypetly.co/api/v1',
   prepareHeaders: (headers) => {
@@ -15,16 +14,18 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithRefresh = async (args, api, extra) => {
   let result = await baseQuery(args, api, extra)
 
-  if (result.error?.status === 401 && args !== 'login') {
-    // RE-TRY via /refresh-token
-    const refresh = await baseQuery('refresh-token', api, extra)
+  if (result.error?.status === 401 && !args.url?.includes('login')) {
+    // ✅ POST et objet complet
+    const refresh = await baseQuery(
+      { url: 'refresh-token', method: 'POST' },
+      api,
+      extra
+    )
 
     if (refresh.data?.access_token) {
-       
       localStorage.setItem('access_token', refresh.data.access_token)
-       
       api.dispatch(setCredentials(refresh.data))
-       
+      // rejoue la requête initiale
       result = await baseQuery(args, api, extra)
     } else {
       api.dispatch(logout())
@@ -38,12 +39,12 @@ export const authApi = createApi({
   baseQuery: baseQueryWithRefresh,
   endpoints: (builder) => ({
     login: builder.mutation({
-      // IMPORTANT : pas de “/” devant
       query: (body) => ({ url: 'login', method: 'POST', body })
+    }),
+    refresh: builder.mutation({               // optionnel mais utile
+      query: () => ({ url: 'refresh-token', method: 'POST' })
     })
   })
 })
 
 export const { useLoginMutation } = authApi
-export { baseQueryWithRefresh }         
-
