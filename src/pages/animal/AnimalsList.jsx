@@ -21,9 +21,16 @@ export default function AnimalsList () {
     {
       field: 'actions',
       headerName: t('table.actions', 'Actions'),
-      width: 120,
+      width: 150,
       renderCell: (params) => (
         <Box>
+         <IconButton
+        color="info"
+        onClick={() => nav(`/animals/${params.row.id}`)}
+        title="Voir le détail"
+      >
+        <Visibility />
+      </IconButton>
           <IconButton
             color="primary"
             onClick={() => nav(`/animals/${params.row.id}/edit`)}
