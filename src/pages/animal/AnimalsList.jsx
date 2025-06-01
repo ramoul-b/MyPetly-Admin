@@ -59,17 +59,33 @@ export default function AnimalsList () {
           {t('button.add_animal', 'Ajouter')}
         </Button>
       </Box>
-      <Box sx={{ height: 500, background: '#fff', borderRadius: 2, p: 2 }}>
-        <DataGrid
-          rows={animals}
-          columns={columns}
-          loading={isLoading}
-          pageSize={10}
-          rowsPerPageOptions={[5, 10, 20, 100]}
-          getRowId={row => row.id}
-          disableSelectionOnClick
-        />
-      </Box>
+      <Box 
+  sx={{ 
+    height: 500, 
+    background: '#fff', 
+    borderRadius: 2, 
+    p: 2,
+    width: '100%',
+    minWidth: 0,
+    overflowX: 'auto'
+  }}
+>
+  <DataGrid
+    rows={animals}
+    columns={columns}
+    loading={isLoading}
+    pageSize={10}
+    rowsPerPageOptions={[5, 10, 20, 100]}
+    getRowId={row => row.id}
+    disableSelectionOnClick
+    sx={{
+      width: '100%',
+      minWidth: 600,
+      '& .MuiDataGrid-cell': { whiteSpace: 'normal', wordBreak: 'break-word' }
+    }}
+  />
+</Box>
+
     </Stack>
   )
 }
