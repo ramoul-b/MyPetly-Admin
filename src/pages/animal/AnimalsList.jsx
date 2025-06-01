@@ -1,7 +1,7 @@
 import useAnimals from '../../modules/animals/useAnimals'
 import { useDeleteAnimalMutation } from '../../modules/animals/animalsApi'
 import { DataGrid } from '@mui/x-data-grid'
-import { Button, Stack, Box, IconButton } from '@mui/material'
+import { Button, Stack, Box, IconButton, Visibility } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
