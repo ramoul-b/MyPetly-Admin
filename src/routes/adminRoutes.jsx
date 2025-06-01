@@ -6,6 +6,10 @@ import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/UsersList'
 import AnimalsList    from '../pages/animal/AnimalsList'
 import AnimalForm from '../pages/animal/AnimalForm'
+import AnimalDetails from './pages/animal/AnimalDetails'
+
+
+
 
 export default [
   {
@@ -26,7 +30,7 @@ export default [
           { index: true, element: <AnimalsList /> },
           { path: 'create', element: <AnimalForm /> },
           { path: ':id/edit', element: <AnimalForm /> },
-          // { path: ':id', element: <AnimalDetails /> }, // optionnel
+          { path: ':id', element: <AnimalDetails /> },
         ]
       },
       {
