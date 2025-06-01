@@ -6,7 +6,7 @@ import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/UsersList'
 import AnimalsList    from '../pages/animal/AnimalsList'
 import AnimalForm from '../pages/animal/AnimalForm'
-import AnimalDetails from './pages/animal/AnimalDetails'
+import AnimalDetails from '../pages/animal/AnimalDetails'
 
 
 
