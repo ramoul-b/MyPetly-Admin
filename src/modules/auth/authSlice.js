@@ -18,12 +18,12 @@ const slice = createSlice({
       Object.assign(state, initialState)
     },
     setCredentials (state, { payload }) {
-     state.token = payload.access_token
-     state.user  = payload.user
-     state.roles = payload.user?.roles        ?? []
-     state.perms = payload.permissions        ?? payload.user?.permissions ?? []
-     state.activeRole = payload.user.roles?.[0] ?? null
-   },
+      state.token = payload.access_token || null
+      state.user  = payload.user || null
+      state.roles = payload.user?.roles ?? []
+      state.perms = payload.permissions ?? payload.user?.permissions ?? []
+      state.activeRole = payload.user?.roles?.[0] ?? null
+    },
    setActiveRole(state,{payload}){ state.activeRole = payload }
   },
   extraReducers: (builder) => {

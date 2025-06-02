@@ -10,6 +10,8 @@ import UsersList from './pages/UsersList'
 import ForbiddenPage from './pages/ForbiddenPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RequirePerm from './modules/auth/RequirePerm'
+import useAuthInit from './modules/auth/useAuthInit'
+
 // App.jsx
 import AppRoutes from './routes'
 
@@ -19,4 +21,12 @@ const ANIMAL_ROLES    = ['Admin', 'Manager']
 const SUPERADMIN_ROLE = ['super_admin']   
 
 
-export default function App () { return <AppRoutes /> }
+export default function App() {
+  const { isLoading } = useAuthInit()
+  
+  if (isLoading) {
+    return <div>Chargement de l'application...</div>
+  }
+  
+  return <AppRoutes />
+}

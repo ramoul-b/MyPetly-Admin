@@ -5,9 +5,10 @@ import { baseQueryWithRefresh } from './authApi'
 
 export default function RequireAuth ({ children }) {
   const token    = useSelector(state => state.auth.token)
+  const user     = useSelector(state => state.auth.user)
   const location = useLocation()
 
-  /* lance /refresh-token toutes les 12 min */
+  // Rafraîchir le token toutes les 12 min
   useEffect(() => {
     if (!token) return
     const id = setInterval(() => {
@@ -16,6 +17,8 @@ export default function RequireAuth ({ children }) {
     return () => clearInterval(id)
   }, [token])
 
+  // ⬇️ Ajout clé pour l’UX : attendre que user soit peuplé AVANT de rediriger
+  if (token && !user) return <div>Chargement...</div>
   if (!token) return <Navigate to="/login" state={{ from: location }} replace />
   return children
 }

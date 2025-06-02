@@ -46,13 +46,16 @@ export const authApi = createApi({
           localStorage.setItem('access_token', data.access_token)
           // Optionnel : api.dispatch(setCredentials(data))
         } catch (e) {
-          // ignore (login échoué)
+          console.log(e);
         }
       }
     }),
     refresh: builder.mutation({
       query: () => ({ url: 'refresh-token', method: 'POST' })
-    })
+    }),
+    userProfile: builder.query({
+      query: () => ({ url: 'user-profile', method: 'GET' }),
+    }),
   })
 })
 
