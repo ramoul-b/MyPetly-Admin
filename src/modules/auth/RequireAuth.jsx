@@ -1,24 +1,26 @@
-import { useEffect } from 'react'
+// src/modules/auth/RequireAuth.jsx
 import { useSelector } from 'react-redux' 
 import { Navigate, useLocation } from 'react-router-dom'
-import { baseQueryWithRefresh } from './authApi'
+import { useAuthContext } from './AuthProvider'
+import AuthLoader from '../../components/AuthLoader' 
 
-export default function RequireAuth ({ children }) {
-  const token    = useSelector(state => state.auth.token)
-  const user     = useSelector(state => state.auth.user)
+
+
+export default function RequireAuth({ children }) {
+  const token = useSelector(state => state.auth.token)
   const location = useLocation()
+  const { isInitialized, isLoading } = useAuthContext()
 
-  // Rafraîchir le token toutes les 12 min
-  useEffect(() => {
-    if (!token) return
-    const id = setInterval(() => {
-      baseQueryWithRefresh('refresh-token', { dispatch:()=>{}, getState:()=>({auth:{token}}) })
-    }, 12 * 60 * 1000)
-    return () => clearInterval(id)
-  }, [token])
+  // Afficher un indicateur de chargement pendant l'initialisation
+  if (isLoading || !isInitialized) {
+    return <AuthLoader />
+  }
 
-  // ⬇️ Ajout clé pour l’UX : attendre que user soit peuplé AVANT de rediriger
-  if (token && !user) return <div>Chargement...</div>
-  if (!token) return <Navigate to="/login" state={{ from: location }} replace />
+  // Vérifier si on a un token dans localStorage même si pas encore dans Redux
+  const localToken = localStorage.getItem('access_token')
+  if (!token && !localToken) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+  
   return children
 }
