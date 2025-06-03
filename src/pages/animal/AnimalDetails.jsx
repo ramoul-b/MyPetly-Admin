@@ -17,7 +17,7 @@ import { useGetAnimalQuery } from '../../modules/animals/animalsApi'
 import ThermostatIcon from '@mui/icons-material/Thermostat'
 import BloodtypeIcon from '@mui/icons-material/Bloodtype'
 import { Switch } from '@mui/material'
-
+import getPhotoUrl from '../../utils/getPhotoUrl'
 
 export default function AnimalDetails() {
   const nav = useNavigate()
@@ -74,10 +74,10 @@ export default function AnimalDetails() {
       <Paper elevation={3} sx={{ borderRadius: 4, p: 4, mb: 4 }}>
         <Stack direction={{ xs: "column", md: "row" }} spacing={3} alignItems="center">
           <Avatar
-            src={data.photo_url}
-            sx={{ width: 110, height: 110, boxShadow: 2 }}
-            alt={data.name}
-          />
+          src={getPhotoUrl(data?.photo_url)}
+          alt="photo"
+          sx={{ width: 110, height: 110, boxShadow: 2 }}
+        />
           <Box sx={{ flex: 1 }}>
             <Typography variant="h4" fontWeight={700}>{data.name}</Typography>
             <Stack direction="row" spacing={1} mt={1} mb={2}>

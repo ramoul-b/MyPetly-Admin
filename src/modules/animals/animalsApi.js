@@ -18,9 +18,19 @@ export const animalsApi = createApi({
       invalidatesTags: ['Animal']
     }),
     updateAnimal: b.mutation({
-      query: ({ id, ...body }) => ({ url: `animals/${id}`, method: 'PUT', body }),
-      invalidatesTags: ['Animal']
-    }),
+  query: ({ id, ...body }) => {
+    // body peut être un FormData ou un objet
+    return {
+      url: `animals/${id}`,
+      method: 'PUT',
+      body,
+      // Ajoute ceci pour forcer le content-type automatique sur FormData
+      ...(body instanceof FormData ? {} : { headers: { 'Content-Type': 'application/json' } })
+    }
+  },
+  invalidatesTags: ['Animal']
+  }),
+
     deleteAnimal: b.mutation({
       query: (id) => ({ url: `animals/${id}`, method: 'DELETE' }),
       invalidatesTags: ['Animal']

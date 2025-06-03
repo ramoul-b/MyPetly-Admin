@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import useAnimalForm from '../../modules/animals/useAnimalForm'
 import {
-  TextField, Button, Stack, MenuItem, Box, InputAdornment
+  TextField, Button, Stack, MenuItem, Box, InputAdornment, Avatar, Typography, CircularProgress, Alert
 } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import PhotoUploader from '../../components/PhotoUploader'
+import getPhotoUrl from '../../utils/getPhotoUrl'
+
 
 export default function AnimalForm () {
   const { id } = useParams()
-  const { data, submit } = useAnimalForm(id)
-  const { register, handleSubmit, reset, control } = useForm({ defaultValues: data })
+  const { data, submit, loading } = useAnimalForm(id)
+  const { register, handleSubmit, reset, control, setValue, watch, formState } = useForm({ defaultValues: data })
   const { t } = useTranslation()
+  const [photoPreview, setPhotoPreview] = useState(data?.photo || '')
+  const [feedback, setFeedback] = useState(null)
+  const inputFileRef = useRef(null)
 
-  // Remet à jour le formulaire quand data arrive
-  React.useEffect(() => { if (data) reset(data) }, [data, reset])
+  React.useEffect(() => {
+    if (data) {
+      reset(data)
+      setPhotoPreview(data.photo || '')
+    }
+  }, [data, reset])
 
   // Options select
   const sexes = [
@@ -26,61 +36,134 @@ export default function AnimalForm () {
     { value: 'lost', label: t('animal.status.lost', 'Perdu') }
   ]
 
+  // Preview image
+  const handlePhotoChange = (e) => {
+    const file = e.target.files?.[0]
+    if (file) setPhotoPreview(URL.createObjectURL(file))
+  }
+
+  // Soumission avec feedback
+  const onSubmit = async (values) => {
+  setFeedback(null)
+  try {
+    let payload = values
+    // Si la photo est un fichier, on envoie en FormData
+    if (values.photo instanceof File || values.photo instanceof Blob) {
+      const formData = new FormData()
+      Object.entries(values).forEach(([key, val]) => {
+        // Attention, certains champs peuvent être undefined
+        if (val !== undefined && val !== null) {
+          formData.append(key, val)
+        }
+      })
+      payload = formData
+    }
+    await submit(payload)
+    setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
+  } catch (err) {
+    setFeedback({ type: 'error', message: t('animal.save_error', 'Erreur lors de l\'enregistrement') })
+  }
+}
+
+
   return (
     <Box component="form"
-      onSubmit={handleSubmit(submit)}
+      onSubmit={handleSubmit(onSubmit)}
       sx={{
-        maxWidth: 480,
+        maxWidth: 500,
         mx: 'auto',
         mt: 4,
         bgcolor: '#fff',
         p: 4,
         borderRadius: 3,
-        boxShadow: 2
+        boxShadow: 2,
+        minHeight: 580
       }}
+      noValidate
     >
       <Stack spacing={3}>
-        <TextField label={t('animal.name', 'Nom')} {...register('name', { required: true })} fullWidth />
-        <TextField label={t('animal.species', 'Espèce')} {...register('species')} fullWidth />
-        <TextField label={t('animal.breed', 'Race')} {...register('breed')} fullWidth />
 
-        <Controller
-          name="sex"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              label={t('animal.sex', 'Sexe')}
-              select
-              fullWidth
-              {...field}
-              value={field.value ?? ''}
-            >
-              {sexes.map(opt =>
-                <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
-              )}
-            </TextField>
-          )}
+        {/* Avatar + Upload */}
+        <PhotoUploader
+          value={watch('photo_url') || data?.photo_url}
+          onChange={file => setValue('photo_url', file)}
+          label="Changer la photo"
         />
+        
 
-        <TextField label={t('animal.color', 'Couleur')} {...register('color')} fullWidth />
-        <TextField
-          label={t('animal.weight', 'Poids')}
-          {...register('weight')}
-          type="number"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">kg</InputAdornment>
-          }}
-          fullWidth
-        />
-        <TextField
-          label={t('animal.height', 'Taille')}
-          {...register('height')}
-          type="number"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">cm</InputAdornment>
-          }}
-          fullWidth
-        />
+        <Typography variant="h5" align="center" fontWeight={600} sx={{ mt: 1, mb: 1 }}>
+          {t('animal.edit_title', 'Modifier un animal')}
+        </Typography>
+
+        {/* Champs */}
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField
+            label={t('animal.name', 'Nom')}
+            {...register('name', { required: true })}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+            error={!!formState.errors.name}
+          />
+          <Controller
+            name="sex"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                label={t('animal.sex', 'Sexe')}
+                select
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+                {...field}
+                value={field.value ?? ''}
+                SelectProps={{ sx: { minWidth: 130 } }}
+              >
+                {sexes.map(opt =>
+                  <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
+                )}
+              </TextField>
+            )}
+          />
+        </Stack>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField label={t('animal.species', 'Espèce')} {...register('species')} fullWidth />
+          <TextField label={t('animal.breed', 'Race')} {...register('breed')} fullWidth />
+        </Stack>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField label={t('animal.color', 'Couleur')} {...register('color')} fullWidth />
+          <TextField
+            label={t('animal.birthdate', 'Date de naissance')}
+            {...register('birthdate')}
+            type="date"
+            InputLabelProps={{ shrink: true }}
+            fullWidth
+          />
+        </Stack>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <TextField
+            label={t('animal.weight', 'Poids')}
+            {...register('weight')}
+            type="number"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">kg</InputAdornment>
+            }}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+          />
+          <TextField
+            label={t('animal.height', 'Taille')}
+            {...register('height')}
+            type="number"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">cm</InputAdornment>
+            }}
+            fullWidth
+            InputLabelProps={{ shrink: true }}
+          />
+        </Stack>
+
         <Controller
           name="status"
           control={control}
@@ -98,18 +181,24 @@ export default function AnimalForm () {
             </TextField>
           )}
         />
-        <TextField
-          label={t('animal.birthdate', 'Date de naissance')}
-          {...register('birthdate')}
-          type="date"
-          InputLabelProps={{ shrink: true }}
-          fullWidth
-        />
-        {/* À activer si besoin d’upload photo :
-        <input type="file" {...register('photo_url')} />
-        */}
-        <Button variant="contained" size="large" type="submit">
-          {t('button.save', 'Enregistrer')}
+
+        {/* Feedback / Loader */}
+        {feedback &&
+          <Alert severity={feedback.type} sx={{ mt: 1, mb: 1 }}>
+            {feedback.message}
+          </Alert>
+        }
+
+        <Button
+          variant="contained"
+          size="large"
+          type="submit"
+          disabled={loading}
+          sx={{ fontWeight: 600, mt: 1 }}
+        >
+          {loading
+            ? <><CircularProgress size={24} sx={{ color: 'white', mr: 2 }} /> {t('button.saving', 'Enregistrement...')}</>
+            : t('button.save', 'Enregistrer')}
         </Button>
       </Stack>
     </Box>
