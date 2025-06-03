@@ -2,31 +2,27 @@ import React, { useRef, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import useAnimalForm from '../../modules/animals/useAnimalForm'
 import {
-  TextField, Button, Stack, MenuItem, Box, InputAdornment, Avatar, Typography, CircularProgress, Alert
+  TextField, Button, Stack, MenuItem, Box, InputAdornment, Typography, CircularProgress, Alert
 } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PhotoUploader from '../../components/PhotoUploader'
-import getPhotoUrl from '../../utils/getPhotoUrl'
-
+import { useUploadImageMutation } from '../../modules/animals/animalsApi'
 
 export default function AnimalForm () {
   const { id } = useParams()
   const { data, submit, loading } = useAnimalForm(id)
   const { register, handleSubmit, reset, control, setValue, watch, formState } = useForm({ defaultValues: data })
   const { t } = useTranslation()
-  const [photoPreview, setPhotoPreview] = useState(data?.photo || '')
   const [feedback, setFeedback] = useState(null)
-  const inputFileRef = useRef(null)
+  const [uploadImage] = useUploadImageMutation()
 
   React.useEffect(() => {
     if (data) {
       reset(data)
-      setPhotoPreview(data.photo || '')
     }
   }, [data, reset])
 
-  // Options select
   const sexes = [
     { value: 'male', label: t('animal.sex.male', 'Mâle') },
     { value: 'female', label: t('animal.sex.female', 'Femelle') }
@@ -36,35 +32,23 @@ export default function AnimalForm () {
     { value: 'lost', label: t('animal.status.lost', 'Perdu') }
   ]
 
-  // Preview image
-  const handlePhotoChange = (e) => {
-    const file = e.target.files?.[0]
-    if (file) setPhotoPreview(URL.createObjectURL(file))
-  }
-
   // Soumission avec feedback
   const onSubmit = async (values) => {
-  setFeedback(null)
-  try {
-    let payload = values
-    // Si la photo est un fichier, on envoie en FormData
-    if (values.photo instanceof File || values.photo instanceof Blob) {
-      const formData = new FormData()
-      Object.entries(values).forEach(([key, val]) => {
-        // Attention, certains champs peuvent être undefined
-        if (val !== undefined && val !== null) {
-          formData.append(key, val)
-        }
-      })
-      payload = formData
+    setFeedback(null)
+    try {
+      // Enregistre les autres infos de l’animal (PUT /animals/{id})
+      await submit(values)
+      // Si une nouvelle photo est sélectionnée
+      if (values.photo_url instanceof File || values.photo_url instanceof Blob) {
+        const res = await uploadImage({ id, file: values.photo_url }).unwrap()
+        // Optionnel : Mettre à jour la preview avec la nouvelle URL
+        if (res.photo_url) setValue('photo_url', res.photo_url)
+      }
+      setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
+    } catch (err) {
+      setFeedback({ type: 'error', message: t('animal.save_error', 'Erreur lors de l\'enregistrement') })
     }
-    await submit(payload)
-    setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
-  } catch (err) {
-    setFeedback({ type: 'error', message: t('animal.save_error', 'Erreur lors de l\'enregistrement') })
   }
-}
-
 
   return (
     <Box component="form"
@@ -82,14 +66,12 @@ export default function AnimalForm () {
       noValidate
     >
       <Stack spacing={3}>
-
         {/* Avatar + Upload */}
         <PhotoUploader
           value={watch('photo_url') || data?.photo_url}
           onChange={file => setValue('photo_url', file)}
           label="Changer la photo"
         />
-        
 
         <Typography variant="h5" align="center" fontWeight={600} sx={{ mt: 1, mb: 1 }}>
           {t('animal.edit_title', 'Modifier un animal')}

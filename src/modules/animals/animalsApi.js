@@ -30,6 +30,18 @@ export const animalsApi = createApi({
   },
   invalidatesTags: ['Animal']
   }),
+  uploadImage: b.mutation({
+  query: ({ id, file }) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return {
+      url: `animals/${id}/image`,
+      method: 'POST',
+      body: formData,
+    };
+  },
+  invalidatesTags: ['Animal']
+}),
 
     deleteAnimal: b.mutation({
       query: (id) => ({ url: `animals/${id}`, method: 'DELETE' }),
@@ -43,5 +55,6 @@ export const {
   useGetAnimalQuery,
   useAddAnimalMutation,
   useUpdateAnimalMutation,
-  useDeleteAnimalMutation
+  useDeleteAnimalMutation,
+  useUploadImageMutation
 } = animalsApi
