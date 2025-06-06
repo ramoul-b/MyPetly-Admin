@@ -28,7 +28,8 @@ export default function ProviderForm() {
         if (res.logo) setValue('logo', res.logo)
       }
       setFeedback({ type: 'success', message: t('provider.saved', 'Saved!') })
-    } catch (err) {
+    } catch (error) {
+      console.error(error)
       setFeedback({ type: 'error', message: t('provider.save_error', 'Save error') })
     }
   }
