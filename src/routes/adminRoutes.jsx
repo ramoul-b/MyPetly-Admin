@@ -3,10 +3,13 @@ import MainLayout   from '../layouts/MainLayout'
 import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
 import Dashboard    from '../pages/Dashboard'
-import UsersList    from '../pages/UsersList'
+import UsersList      from '../pages/UsersList'
 import AnimalsList    from '../pages/animal/AnimalsList'
-import AnimalForm from '../pages/animal/AnimalForm'
-import AnimalDetails from '../pages/animal/AnimalDetails'
+import AnimalForm     from '../pages/animal/AnimalForm'
+import AnimalDetails  from '../pages/animal/AnimalDetails'
+import ProvidersList  from '../pages/provider/ProvidersList'
+import ProviderForm   from '../pages/provider/ProviderForm'
+import ProviderDetails from '../pages/provider/ProviderDetails'
 
 
 
@@ -31,6 +34,15 @@ export default [
           { path: 'create', element: <AnimalForm /> },
           { path: ':id/edit', element: <AnimalForm /> },
           { path: ':id', element: <AnimalDetails /> },
+        ]
+      },
+      {
+        path: 'providers',
+        children: [
+          { index: true, element: <ProvidersList /> },
+          { path: 'create', element: <ProviderForm /> },
+          { path: ':id/edit', element: <ProviderForm /> },
+          { path: ':id', element: <ProviderDetails /> }
         ]
       },
       {

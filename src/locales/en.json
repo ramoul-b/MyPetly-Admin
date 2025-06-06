@@ -15,6 +15,7 @@
     "logout": "Logout",
     "language": "Language",
     "add_animal": "Add",
+    "add_provider": "Add",
     "edit": "Edit",
     "delete": "Delete"
 
@@ -23,7 +24,8 @@
     "not_found": "Page not found",
     "dashboard": "Dashboard",
     "animals": "Animals",
-    "users": "Users"
+    "users": "Users",
+    "providers": "Providers"
   },
     "roles": {
     "super_admin": "Super Admin",
@@ -60,6 +62,17 @@
   },
   "button": {
     "save": "Enregistrer"
+  },
+  "provider": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "create_title": "New provider",
+    "edit_title": "Edit provider",
+    "saved": "Saved!",
+    "save_error": "Save error",
+    "not_found": "Provider not found"
   }
 }
   
