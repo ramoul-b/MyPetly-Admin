@@ -1,6 +1,6 @@
 export default function logout() {
-  localStorage.removeItem("token")
-  localStorage.removeItem("user")
-  localStorage.removeItem("roles")
-  window.location.href = "/login"
+  localStorage.removeItem('access_token')
+  localStorage.removeItem('user')
+  localStorage.removeItem('roles')
+  window.location.href = '/login'
 }
