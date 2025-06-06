@@ -19,7 +19,7 @@ const drawerWidth = 220
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
-  { label: 'Providers', path: '/providers', icon: <PetsIcon /> }
+  { label: 'Providers', path: '/providers', icon: <PetsIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon /> }
 ]
