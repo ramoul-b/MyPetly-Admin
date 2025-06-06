@@ -11,12 +11,17 @@ import RoleBadge from '../components/RoleBadge'
 import { useTranslation } from 'react-i18next'
 import logout from '../modules/auth/logout'
 import LogoMyPetly from '../assets/LogoMyPetly.png'
+import PeopleIcon from '@mui/icons-material/People'
+import BusinessIcon from '@mui/icons-material/Business' // Ou autre icône MUI pertinente
 
 const drawerWidth = 220
 
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
-  { label: 'Animals', path: '/animals', icon: <PetsIcon /> }
+  { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
+  { label: 'Users', path: '/users', icon: <PeopleIcon /> },
+  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
+
 ]
 
 export default function MainLayout() {

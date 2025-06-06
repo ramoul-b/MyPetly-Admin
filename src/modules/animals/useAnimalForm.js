@@ -17,7 +17,7 @@ export default function useAnimalForm(id) {
     } else {
       await addAnimal(values).unwrap()
     }
-    nav('/animals')
+    nav(`/animals/${id}`)
   }
 
   return { data, submit, addStatus, updateStatus }

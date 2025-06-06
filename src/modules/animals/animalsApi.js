@@ -11,7 +11,8 @@ export const animalsApi = createApi({
       providesTags: ['Animal']
     }),
     getAnimal: b.query({
-      query: (id) => `animals/${id}`
+      query: (id) => `animals/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Animal', id }]
     }),
     addAnimal: b.mutation({
       query: (body) => ({ url: 'animals', method: 'POST', body }),
@@ -40,7 +41,7 @@ export const animalsApi = createApi({
       body: formData,
     };
   },
-  invalidatesTags: ['Animal']
+  invalidatesTags: (result, error, { id }) => [{ type: 'Animal', id }],
 }),
 
     deleteAnimal: b.mutation({
