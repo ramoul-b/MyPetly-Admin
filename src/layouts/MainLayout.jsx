@@ -20,9 +20,9 @@ const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
-  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
-
+  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> }
 ]
+
 
 export default function MainLayout() {
   const { pathname } = useLocation()
@@ -30,6 +30,7 @@ export default function MainLayout() {
 const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
+  '/providers': t('page.providers', 'Providers'),
   '/users': t('page.users', 'Users'),
   // ajoute d'autres routes ici...
 }

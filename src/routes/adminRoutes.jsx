@@ -1,4 +1,3 @@
-// src/routes/adminRoutes.jsx
 import MainLayout   from '../layouts/MainLayout'
 import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
@@ -12,8 +11,6 @@ import UserForm from '../pages/users/UserForm'
 import ProvidersList from '../pages/provider/ProvidersList'
 import ProviderForm from '../pages/provider/ProviderForm'
 import ProviderDetails from '../pages/provider/ProviderDetails'
-
-
 
 export default [
   {
@@ -38,52 +35,49 @@ export default [
         ]
       },
       {
-  path: 'users',
-  children: [
-    {
-      index: true,
-      element: <RequireRole allowed={['super_admin']}><UsersList /></RequireRole>,
-      handle: { title: 'users' }
-    },
-    {
-      path: ':id',
-      element: <RequireRole allowed={['super_admin']}><UserDetails /></RequireRole>
-    },
-    {
-      path: ':id/edit',
-      element: <RequireRole allowed={['super_admin']}><UserForm /></RequireRole>
-    },
-    {
-      path: 'create',
-      element: <RequireRole allowed={['super_admin']}><UserForm /></RequireRole>
-    },
-  ]
-},
-{
-  path: 'providers',
-  children: [
-    {
-      index: true,
-      element: <RequireRole allowed={['super_admin']}><ProvidersList /></RequireRole>,
-      handle: { title: 'providers' }
-    },
-    {
-      path: ':id',
-      element: <RequireRole allowed={['super_admin']}><ProviderDetails /></RequireRole>
-    },
-    {
-      path: ':id/edit',
-      element: <RequireRole allowed={['super_admin']}><ProviderForm isEdit={true} /></RequireRole>
-    },
-    {
-      path: 'create',
-      element: <RequireRole allowed={['super_admin']}><ProviderForm /></RequireRole>
-    },
-  ]
-}
-
+        path: 'users',
+        children: [
+          {
+            index: true,
+            element: <RequireRole allowed={['super_admin']}><UsersList /></RequireRole>,
+            handle: { title: 'users' }
+          },
+          {
+            path: ':id',
+            element: <RequireRole allowed={['super_admin']}><UserDetails /></RequireRole>
+          },
+          {
+            path: ':id/edit',
+            element: <RequireRole allowed={['super_admin']}><UserForm /></RequireRole>
+          },
+          {
+            path: 'create',
+            element: <RequireRole allowed={['super_admin']}><UserForm /></RequireRole>
+          },
+        ]
+      },
+      {
+        path: 'providers',
+        children: [
+          {
+            index: true,
+            element: <RequireRole allowed={['super_admin']}><ProvidersList /></RequireRole>,
+            handle: { title: 'providers' }
+          },
+          {
+            path: ':id',
+            element: <RequireRole allowed={['super_admin']}><ProviderDetails /></RequireRole>
+          },
+          {
+            path: ':id/edit',
+            element: <RequireRole allowed={['super_admin']}><ProviderForm isEdit={true} /></RequireRole>
+          },
+          {
+            path: 'create',
+            element: <RequireRole allowed={['super_admin']}><ProviderForm /></RequireRole>
+          },
+        ]
+      }
     ]
   }
 ]
-
-
