@@ -14,6 +14,7 @@ export default function ProviderForm() {
   const { t } = useTranslation()
   const [feedback, setFeedback] = useState(null)
   const [uploadImage] = useUploadProviderImageMutation()
+  const { i18n } = useTranslation()
 
   React.useEffect(() => {
     if (data) reset(data)
@@ -61,12 +62,20 @@ export default function ProviderForm() {
         </Typography>
 
         <TextField
-          label={t('provider.name', 'Name')}
-          {...register('name', { required: true })}
-          fullWidth
-          InputLabelProps={{ shrink: true }}
-          error={!!formState.errors.name}
-        />
+  label={t('provider.name_en', 'Name (EN)')}
+  {...register('name.en', { required: true })}
+  fullWidth
+/>
+<TextField
+  label={t('provider.name_fr', 'Name (FR)')}
+  {...register('name.fr')}
+  fullWidth
+/>
+<TextField
+  label={t('provider.name_fr', 'Name (IT)')}
+  {...register('name.it')}
+  fullWidth
+/>
         <TextField
           label={t('provider.email', 'Email')}
           {...register('email')}

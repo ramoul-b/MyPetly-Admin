@@ -14,10 +14,17 @@ export default function ProvidersList() {
   const [deleteProvider] = useDeleteProviderMutation()
   const nav = useNavigate()
   const { t } = useTranslation()
+  const { i18n } = useTranslation()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: t('provider.name', 'Name'), flex: 1 },
+    {
+      field: 'name',
+      headerName: t('provider.name', 'Name'),
+      flex: 1,
+      renderCell: params => params.row.name?.[i18n.language] || params.row.name?.en || ''
+    },
+
     { field: 'email', headerName: t('provider.email', 'Email'), flex: 1 },
     { field: 'phone', headerName: t('provider.phone', 'Phone'), flex: 1 },
     {
