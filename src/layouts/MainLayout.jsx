@@ -16,7 +16,8 @@ const drawerWidth = 220
 
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
-  { label: 'Animals', path: '/animals', icon: <PetsIcon /> }
+  { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
+  { label: 'Providers', path: '/providers', icon: <PetsIcon /> }
 ]
 
 export default function MainLayout() {
@@ -25,6 +26,7 @@ export default function MainLayout() {
 const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
+  '/providers': t('page.providers', 'Providers'),
   '/users': t('page.users', 'Users'),
   // ajoute d'autres routes ici...
 }

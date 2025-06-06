@@ -31,10 +31,12 @@
   "page": {
   "dashboard": "Dashboard",
   "animals": "Animali",
-  "users": "Utenti"
+  "users": "Utenti",
+  "providers": "Fornitori"
 },
   "button": {
     "add_animal": "Aggiungi",
+    "add_provider": "Aggiungi",
     "edit": "Modifica",
     "delete": "Elimina"
   },
@@ -65,6 +67,17 @@
   },
   "button": {
     "save": "Enregistrer"
+  },
+  "provider": {
+    "name": "Nome",
+    "email": "Email",
+    "phone": "Telefono",
+    "address": "Indirizzo",
+    "create_title": "Nuovo fornitore",
+    "edit_title": "Modifica fornitore",
+    "saved": "Salvato!",
+    "save_error": "Errore di salvataggio",
+    "not_found": "Fornitore non trovato"
   }
 }
   

@@ -31,10 +31,12 @@
   "page": {
   "dashboard": "Tableau de bord",
   "animals": "Animaux",
-  "users": "Utilisateurs"
+  "users": "Utilisateurs",
+  "providers": "Prestataires"
   },
   "button": {
     "add_animal": "Ajouter",
+    "add_provider": "Ajouter",
     "edit": "Éditer",
     "delete": "Supprimer"
   },
@@ -65,6 +67,17 @@
   },
   "button": {
     "save": "Enregistrer"
+  }
+  ,"provider": {
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "create_title": "Nouveau prestataire",
+    "edit_title": "Modifier le prestataire",
+    "saved": "Modifications enregistrées !",
+    "save_error": "Erreur lors de l'enregistrement",
+    "not_found": "Prestataire introuvable"
   }
 }
   
