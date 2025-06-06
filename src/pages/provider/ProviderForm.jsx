@@ -23,13 +23,13 @@ export default function ProviderForm() {
     setFeedback(null)
     try {
       await submit(values)
-      if (values.photo instanceof File || values.photo instanceof Blob) {
-        const res = await uploadImage({ id, file: values.photo }).unwrap()
-        if (res.photo) setValue('photo', res.photo)
+      if (values.logo instanceof File || values.logo instanceof Blob) {
+        const res = await uploadImage({ id, file: values.logo }).unwrap()
+        if (res.logo) setValue('logo', res.logo)
       }
       setFeedback({ type: 'success', message: t('provider.saved', 'Saved!') })
-    } catch (_err) {
-      console.error(_err)
+    } catch (error) {
+      console.error(error)
       setFeedback({ type: 'error', message: t('provider.save_error', 'Save error') })
     }
   }
@@ -52,8 +52,8 @@ export default function ProviderForm() {
     >
       <Stack spacing={3}>
         <PhotoUploader
-          value={watch('photo') || data?.photo}
-          onChange={file => setValue('photo', file)}
+          value={watch('logo') || data?.logo}
+          onChange={file => setValue('logo', file)}
         />
 
         <Typography variant="h5" align="center" fontWeight={600} sx={{ mt: 1, mb: 1 }}>
