@@ -35,6 +35,15 @@ export default [
         ]
       },
       {
+        path: 'providers',
+        children: [
+          { index: true, element: <ProvidersList /> },
+          { path: 'create', element: <ProviderForm /> },
+          { path: ':id/edit', element: <ProviderForm /> },
+          { path: ':id', element: <ProviderDetails /> }
+        ]
+      },
+      {
         path: 'users',
         children: [
           {
