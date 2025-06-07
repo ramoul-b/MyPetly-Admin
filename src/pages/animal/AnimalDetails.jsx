@@ -12,17 +12,18 @@ import CancelIcon from '@mui/icons-material/Cancel'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
 import EventIcon from '@mui/icons-material/Event'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useGetAnimalQuery } from '../../modules/animals/animalsApi'
 import ThermostatIcon from '@mui/icons-material/Thermostat'
 import BloodtypeIcon from '@mui/icons-material/Bloodtype'
 import { Switch } from '@mui/material'
-import getPhotoUrl from '../../utils/getPhotoUrl'
 
 export default function AnimalDetails() {
   const nav = useNavigate()
   const { id } = useParams()
   const { data, isLoading } = useGetAnimalQuery(id)
+  const location = useLocation()
+  const updatedPhoto = location.state?.updatedPhoto
 
   if (isLoading) return <div>Chargement…</div>
   if (!data) return <div>Animal introuvable</div>
@@ -74,7 +75,7 @@ export default function AnimalDetails() {
       <Paper elevation={3} sx={{ borderRadius: 4, p: 4, mb: 4 }}>
         <Stack direction={{ xs: "column", md: "row" }} spacing={3} alignItems="center">
           <Avatar
-          src={getPhotoUrl(data?.photo_url)}
+          src={updatedPhoto || data.photo_url}
           alt="photo"
           sx={{ width: 110, height: 110, boxShadow: 2 }}
         />

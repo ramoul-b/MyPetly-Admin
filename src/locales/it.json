@@ -12,7 +12,8 @@
     "forbidden": "Accesso negato"
     },
     "button": {
-      "logout": "Disconnetti"
+      "logout": "Disconnetti",
+      "profile": "Profilo"
     },
     "page": {
       "not_found": "Pagina non trovata"
@@ -33,9 +34,15 @@
   "animals": "Animali",
   "users": "Utenti",
   "profile": "Il mio profilo"
+  "providers": "Fornitori",
+  "roles": "Ruoli",
+  "permissions": "Permessi",
 },
   "button": {
     "add_animal": "Aggiungi",
+    "add_provider": "Aggiungi",
+    "add_role": "Aggiungi",
+    "add_permission": "Aggiungi",
     "edit": "Modifica",
     "delete": "Elimina"
   },
@@ -71,6 +78,8 @@
   },
   "profile": {
     "title": "Il mio profilo",
+  },
+  "provider": {
     "name": "Nome",
     "email": "Email",
     "phone": "Telefono",
@@ -90,6 +99,25 @@
     "delete": "Elimina il mio account",
     "confirm_deactivation": "Confermare la disattivazione?",
     "confirm_delete": "Confermare l'eliminazione dell'account?"
+    "create_title": "Nuovo fornitore",
+    "edit_title": "Modifica fornitore",
+    "saved": "Salvato!",
+    "save_error": "Errore di salvataggio",
+    "not_found": "Fornitore non trovato"
+  },
+  "role": {
+    "create_title": "Nuovo ruolo",
+    "edit_title": "Modifica ruolo",
+    "saved": "Salvato!",
+    "save_error": "Errore di salvataggio",
+    "name": "Nome",
+    "not_found": "Ruolo non trovato"
+  },
+  "permission": {
+    "create_title": "Nuovo permesso",
+    "edit_title": "Modifica permesso",
+    "save_error": "Errore di salvataggio",
+    "name": "Nome"
   }
 }
   

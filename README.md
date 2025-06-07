@@ -10,3 +10,7 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Roles & Permissions module
+
+This project now includes an admin module to manage roles and permissions. It provides CRUD pages for roles and permissions as well as an interface to assign permissions to a role. Users can be assigned multiple roles from the user form.

@@ -46,6 +46,7 @@ export default function AnimalForm () {
       }
       setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
     } catch {
+      console.error(error)
       setFeedback({ type: 'error', message: t('animal.save_error', "Erreur lors de l'enregistrement") })
     }
   }
