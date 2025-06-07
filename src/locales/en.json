@@ -16,6 +16,8 @@
     "language": "Language",
     "add_animal": "Add",
     "add_provider": "Add",
+    "add_role": "Add",
+    "add_permission": "Add",
     "edit": "Edit",
     "delete": "Delete"
 
@@ -25,7 +27,9 @@
     "dashboard": "Dashboard",
     "animals": "Animals",
     "users": "Users",
-    "providers": "Providers"
+    "providers": "Providers",
+    "roles": "Roles",
+    "permissions": "Permissions"
   },
     "roles": {
     "super_admin": "Super Admin",
@@ -73,6 +77,20 @@
     "saved": "Saved!",
     "save_error": "Save error",
     "not_found": "Provider not found"
+  },
+  "role": {
+    "create_title": "New role",
+    "edit_title": "Edit role",
+    "saved": "Saved!",
+    "save_error": "Save error",
+    "name": "Name",
+    "not_found": "Role not found"
+  },
+  "permission": {
+    "create_title": "New permission",
+    "edit_title": "Edit permission",
+    "save_error": "Save error",
+    "name": "Name"
   }
 }
   

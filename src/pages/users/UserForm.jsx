@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PhotoUploader from '../../components/PhotoUploader'
 import { useUploadImageMutation } from '../../modules/users/usersApi'
+import useRoles from '../../modules/roles/useRoles'
 
 export default function UserForm () {
   const { id } = useParams()
@@ -23,13 +24,7 @@ export default function UserForm () {
     }
   }, [data, reset])
 
-  // Les rôles doivent venir de l'API ou être hardcodés temporairement
-  const roles = [
-    { value: 'super_admin', label: 'Super Admin' },
-    { value: 'admin', label: 'Admin' },
-    { value: 'manager', label: 'Manager' },
-    { value: 'user', label: 'Utilisateur' }
-  ]
+  const { roles = [] } = useRoles()
 
   // Soumission avec feedback
   const onSubmit = async (values) => {
@@ -113,7 +108,9 @@ export default function UserForm () {
               value={field.value ?? []}
             >
               {roles.map(opt =>
-                <MenuItem key={opt.value} value={opt.value}>{opt.label}</MenuItem>
+                <MenuItem key={opt.id || opt.value} value={opt.name || opt.value}>
+                  {opt.label || opt.name}
+                </MenuItem>
               )}
             </TextField>
           )}
