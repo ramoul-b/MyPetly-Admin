@@ -12,7 +12,8 @@
     "forbidden": "Accès interdit"
   },
   "button": {
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "profile": "Profil"
   },
   "page": {
     "not_found": "Page introuvable"
@@ -34,7 +35,8 @@
   "users": "Utilisateurs",
   "providers": "Prestataires",
   "roles": "Rôles",
-  "permissions": "Permissions"
+  "permissions": "Permissions",
+  "profile": "Profil"
   },
   "button": {
     "add_animal": "Ajouter",

@@ -16,6 +16,8 @@ import RoleForm from '../pages/roles/RoleForm'
 import RoleDetails from '../pages/roles/RoleDetails'
 import PermissionsList from '../pages/roles/PermissionsList'
 import PermissionForm from '../pages/roles/PermissionForm'
+import Profile from '../pages/profile/Profile'
+
 
 export default [
   {
@@ -29,6 +31,11 @@ export default [
         index: true,
         element: <Dashboard />,
         handle: { title: 'dashboard' }
+      },
+      {
+        path: 'profile',
+        element: <Profile />, 
+        handle: { title: 'profile' }
       },
       {
         path: 'animals',

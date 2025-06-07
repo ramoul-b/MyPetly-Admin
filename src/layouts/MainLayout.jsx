@@ -6,6 +6,7 @@ import {
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PetsIcon from '@mui/icons-material/Pets'
 import LogoutIcon from '@mui/icons-material/Logout'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LangSwitch from '../components/LangSwitch'
 import RoleBadge from '../components/RoleBadge'
 import { useTranslation } from 'react-i18next'
@@ -128,6 +129,20 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
             
             </Tooltip>
             <RoleBadge />
+            <Tooltip title={t('button.profile')}>
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/profile"
+                sx={{
+                  bgcolor: 'rgba(255,255,255,0.09)',
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.20)' },
+                  boxShadow: 0
+                }}
+              >
+                <AccountCircleIcon />
+              </IconButton>
+            </Tooltip>
             <Tooltip title={t('button.logout')}>
   <IconButton
     color="inherit"

@@ -14,6 +14,7 @@
   "button": {
     "logout": "Logout",
     "language": "Language",
+    "profile": "Profile",
     "add_animal": "Add",
     "add_provider": "Add",
     "add_role": "Add",
@@ -29,7 +30,8 @@
     "users": "Users",
     "providers": "Providers",
     "roles": "Roles",
-    "permissions": "Permissions"
+    "permissions": "Permissions",
+    "profile": "Profile"
   },
     "roles": {
     "super_admin": "Super Admin",

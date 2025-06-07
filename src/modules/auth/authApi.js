@@ -55,12 +55,14 @@ export const authApi = createApi({
       query: () => ({ url: 'refresh-token', method: 'POST' })
     }),
     userProfile: builder.query({
-      query: () => ({ url: 'user-profile', method: 'GET' }),
-    }),
+      query: () => ({ url: 'user-profile', method: 'GET' })
+    })
   })
 })
 
-
-
-export const { useLoginMutation } = authApi
-export { baseQueryWithRefresh } 
+export const {
+  useLoginMutation,
+  useRefreshMutation,
+  useUserProfileQuery
+} = authApi
+export { baseQueryWithRefresh }

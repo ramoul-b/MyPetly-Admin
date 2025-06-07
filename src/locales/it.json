@@ -12,7 +12,8 @@
     "forbidden": "Accesso negato"
     },
     "button": {
-      "logout": "Disconnetti"
+      "logout": "Disconnetti",
+      "profile": "Profilo"
     },
     "page": {
       "not_found": "Pagina non trovata"
@@ -34,7 +35,8 @@
   "users": "Utenti",
   "providers": "Fornitori",
   "roles": "Ruoli",
-  "permissions": "Permessi"
+  "permissions": "Permessi",
+  "profile": "Profilo"
 },
   "button": {
     "add_animal": "Aggiungi",
