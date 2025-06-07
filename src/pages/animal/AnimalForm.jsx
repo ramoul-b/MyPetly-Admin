@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import useAnimalForm from '../../modules/animals/useAnimalForm'
 import {
@@ -45,8 +45,8 @@ export default function AnimalForm () {
         if (res.photo_url) setValue('photo_url', res.photo_url)
       }
       setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
-    } catch (err) {
-      setFeedback({ type: 'error', message: t('animal.save_error', 'Erreur lors de l\'enregistrement') })
+    } catch {
+      setFeedback({ type: 'error', message: t('animal.save_error', "Erreur lors de l'enregistrement") })
     }
   }
 
