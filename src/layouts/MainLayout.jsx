@@ -20,7 +20,9 @@ const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
-  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> }
+  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
+  { label: 'Roles', path: '/roles', icon: <PeopleIcon /> },
+  { label: 'Permissions', path: '/permissions', icon: <BusinessIcon /> }
 ]
 
 
@@ -32,6 +34,8 @@ const pageTitles = {
   '/animals': t('page.animals', 'Animals'),
   '/providers': t('page.providers', 'Providers'),
   '/users': t('page.users', 'Users'),
+  '/roles': t('page.roles', 'Roles'),
+  '/permissions': t('page.permissions', 'Permissions'),
   // ajoute d'autres routes ici...
 }
 
