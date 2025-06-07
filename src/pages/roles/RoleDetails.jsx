@@ -1,43 +1,104 @@
-import { Box, Typography, Stack, FormControlLabel, Switch, Button } from '@mui/material'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useGetRoleQuery, useListPermissionsQuery, useAssignPermissionMutation, useRemovePermissionMutation } from '../../modules/roles/rolesApi'
+// src/pages/roles/RoleDetails.jsx
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import {
+  useGetRoleQuery,
+  useListPermissionsQuery,
+  useAssignPermissionMutation,
+  useRemovePermissionMutation
+} from '../../modules/roles/rolesApi'
+import {
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
+  Typography, Switch, Snackbar, Box, CircularProgress, Button
+} from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-export default function RoleDetails() {
+export default function RoleDetails () {
   const { id } = useParams()
-  const nav = useNavigate()
   const { t } = useTranslation()
-  const { data: role, isLoading } = useGetRoleQuery(id)
-  const { permissions = [] } = useListPermissionsQuery(undefined, { selectFromResult: ({ data }) => ({ permissions: data }) })
-  const [assign] = useAssignPermissionMutation()
-  const [remove] = useRemovePermissionMutation()
+  const { data: role, isLoading: loadingRole } = useGetRoleQuery(id)
+  const { data: allPermissions, isLoading: loadingPerms } = useListPermissionsQuery()
+  const [assignPermission] = useAssignPermissionMutation()
+  const [removePermission] = useRemovePermissionMutation()
+  const [feedback, setFeedback] = useState(null)
+  const [switchLoading, setSwitchLoading] = useState({})
 
-  if (isLoading) return <div>Loading...</div>
-  if (!role) return <div>{t('role.not_found', 'Role not found')}</div>
+  // Les permissions attribuées à ce rôle (par id)
+  const assignedIds = new Set(role?.permissions?.map(p => p.id))
 
-  const toggle = async (permId, checked) => {
-    if (checked) await assign({ roleId: id, permissionId: permId })
-    else await remove({ roleId: id, permissionId: permId })
+  const handleToggle = async (permissionId, checked) => {
+    setSwitchLoading(prev => ({ ...prev, [permissionId]: true }))
+    try {
+      if (checked) {
+        await assignPermission({ roleId: id, permissionId }).unwrap()
+      } else {
+        await removePermission({ roleId: id, permissionId }).unwrap()
+      }
+      setFeedback({ type: 'success', msg: t('role.edit_ok', 'Modification enregistrée !') })
+    } catch {
+      setFeedback({ type: 'error', msg: t('role.edit_fail', 'Erreur lors de la modification.') })
+    } finally {
+      setSwitchLoading(prev => ({ ...prev, [permissionId]: false }))
+    }
   }
 
+  if (loadingRole || loadingPerms) {
+    return (
+      <Box sx={{ textAlign: 'center', py: 8 }}>
+        <CircularProgress />
+      </Box>
+    )
+  }
+  if (!role) return <Typography color="error">Rôle introuvable</Typography>
+
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto' }}>
-      <Typography variant="h4" fontWeight={700} sx={{ mb: 2 }}>{role.name}</Typography>
-      <Stack spacing={1}>
-        {permissions.map(p => (
-          <FormControlLabel
-            key={p.id}
-            control={<Switch
-              checked={role.permissions?.includes(p.name)}
-              onChange={e => toggle(p.id, e.target.checked)}
-            />}
-            label={p.name}
-          />
-        ))}
-      </Stack>
-      <Button sx={{ mt: 3 }} variant="contained" onClick={() => nav(`/roles/${id}/edit`)}>
-        {t('button.edit', 'Edit')}
+    <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4 }}>
+      <Typography variant="h4" fontWeight={700} gutterBottom>
+        {role.name}
+      </Typography>
+      <Typography sx={{ mb: 3, color: '#64748B' }}>
+        {t('role.permissions_list', 'Permissions attribuées à ce rôle')}
+      </Typography>
+      <TableContainer component={Paper} sx={{ borderRadius: 3 }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>{t('permission.name', 'Permission')}</TableCell>
+              <TableCell align="center">{t('role.assigned', 'Attribué')}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allPermissions?.map((perm) => (
+              <TableRow key={perm.id}>
+                <TableCell>
+                  {perm.name}
+                </TableCell>
+                <TableCell align="center">
+                  <Switch
+                    checked={assignedIds.has(perm.id)}
+                    onChange={e => handleToggle(perm.id, e.target.checked)}
+                    color="primary"
+                    disabled={switchLoading[perm.id]}
+                  />
+                  {switchLoading[perm.id] && <CircularProgress size={20} sx={{ ml: 1 }} />}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <Button sx={{ mt: 4 }} variant="outlined" onClick={() => window.history.back()}>
+        {t('button.back', 'Retour')}
       </Button>
+
+      <Snackbar
+        open={!!feedback}
+        autoHideDuration={2000}
+        onClose={() => setFeedback(null)}
+        message={feedback?.msg}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      />
     </Box>
   )
 }
