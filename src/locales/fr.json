@@ -33,10 +33,10 @@
   "dashboard": "Tableau de bord",
   "animals": "Animaux",
   "users": "Utilisateurs",
-  "profile": "Mon profil"
+  "profile": "Mon profil",
   "providers": "Prestataires",
   "roles": "Rôles",
-  "permissions": "Permissions",
+  "permissions": "Permissions"
   },
   "button": {
     "add_animal": "Ajouter",

@@ -33,10 +33,10 @@
   "dashboard": "Dashboard",
   "animals": "Animali",
   "users": "Utenti",
-  "profile": "Il mio profilo"
+  "profile": "Il mio profilo",
   "providers": "Fornitori",
   "roles": "Ruoli",
-  "permissions": "Permessi",
+  "permissions": "Permessi"
 },
   "button": {
     "add_animal": "Aggiungi",
@@ -77,7 +77,7 @@
     "cancel": "Annulla"
   },
   "profile": {
-    "title": "Il mio profilo",
+    "title": "Il mio profilo"
   },
   "provider": {
     "name": "Nome",
@@ -98,7 +98,7 @@
     "deactivate": "Disattiva il mio account",
     "delete": "Elimina il mio account",
     "confirm_deactivation": "Confermare la disattivazione?",
-    "confirm_delete": "Confermare l'eliminazione dell'account?"
+    "confirm_delete": "Confermare l'eliminazione dell'account?",
     "create_title": "Nuovo fornitore",
     "edit_title": "Modifica fornitore",
     "saved": "Salvato!",

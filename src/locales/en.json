@@ -30,7 +30,7 @@
     "users": "Users",
     "providers": "Providers",
     "roles": "Roles",
-    "permissions": "Permissions",
+    "permissions": "Permissions"
 
   },
     "roles": {
@@ -71,7 +71,7 @@
     "profile": "My Profile"
   },
   "profile": {
-    "title": "My Profile",
+    "title": "My Profile"
   },
   "provider": {
     "name": "Name",
@@ -92,7 +92,7 @@
     "deactivate": "Deactivate my account",
     "delete": "Delete my account",
     "confirm_deactivation": "Confirm deactivation?",
-    "confirm_delete": "Confirm account deletion?"
+    "confirm_delete": "Confirm account deletion?",
     "create_title": "New provider",
     "edit_title": "Edit provider",
     "saved": "Saved!",
