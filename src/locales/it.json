@@ -32,11 +32,15 @@
   "dashboard": "Dashboard",
   "animals": "Animali",
   "users": "Utenti",
-  "providers": "Fornitori"
+  "providers": "Fornitori",
+  "roles": "Ruoli",
+  "permissions": "Permessi"
 },
   "button": {
     "add_animal": "Aggiungi",
     "add_provider": "Aggiungi",
+    "add_role": "Aggiungi",
+    "add_permission": "Aggiungi",
     "edit": "Modifica",
     "delete": "Elimina"
   },
@@ -78,6 +82,20 @@
     "saved": "Salvato!",
     "save_error": "Errore di salvataggio",
     "not_found": "Fornitore non trovato"
+  },
+  "role": {
+    "create_title": "Nuovo ruolo",
+    "edit_title": "Modifica ruolo",
+    "saved": "Salvato!",
+    "save_error": "Errore di salvataggio",
+    "name": "Nome",
+    "not_found": "Ruolo non trovato"
+  },
+  "permission": {
+    "create_title": "Nuovo permesso",
+    "edit_title": "Modifica permesso",
+    "save_error": "Errore di salvataggio",
+    "name": "Nome"
   }
 }
   

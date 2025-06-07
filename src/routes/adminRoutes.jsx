@@ -11,6 +11,11 @@ import UserForm from '../pages/users/UserForm'
 import ProvidersList from '../pages/provider/ProvidersList'
 import ProviderForm from '../pages/provider/ProviderForm'
 import ProviderDetails from '../pages/provider/ProviderDetails'
+import RolesList from '../pages/roles/RolesList'
+import RoleForm from '../pages/roles/RoleForm'
+import RoleDetails from '../pages/roles/RoleDetails'
+import PermissionsList from '../pages/roles/PermissionsList'
+import PermissionForm from '../pages/roles/PermissionForm'
 
 export default [
   {
@@ -30,9 +35,9 @@ export default [
         children: [
           { index: true, element: <AnimalsList /> },
           { path: 'create', element: <AnimalForm /> },
-          { path: ':id/edit', element: <AnimalForm /> },
-          { path: ':id', element: <AnimalDetails /> },
-        ]
+        { path: ':id/edit', element: <AnimalForm /> },
+        { path: ':id', element: <AnimalDetails /> },
+      ]
       },
       {
         path: 'providers',
@@ -41,6 +46,23 @@ export default [
           { path: 'create', element: <ProviderForm /> },
           { path: ':id/edit', element: <ProviderForm /> },
           { path: ':id', element: <ProviderDetails /> }
+        ]
+      },
+      {
+        path: 'roles',
+        children: [
+          { index: true, element: <RolesList /> },
+          { path: 'create', element: <RoleForm /> },
+          { path: ':id/edit', element: <RoleForm /> },
+          { path: ':id', element: <RoleDetails /> }
+        ]
+      },
+      {
+        path: 'permissions',
+        children: [
+          { index: true, element: <PermissionsList /> },
+          { path: 'create', element: <PermissionForm /> },
+          { path: ':id/edit', element: <PermissionForm /> }
         ]
       },
       {

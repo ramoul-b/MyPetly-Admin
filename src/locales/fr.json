@@ -32,11 +32,15 @@
   "dashboard": "Tableau de bord",
   "animals": "Animaux",
   "users": "Utilisateurs",
-  "providers": "Prestataires"
+  "providers": "Prestataires",
+  "roles": "Rôles",
+  "permissions": "Permissions"
   },
   "button": {
     "add_animal": "Ajouter",
     "add_provider": "Ajouter",
+    "add_role": "Ajouter",
+    "add_permission": "Ajouter",
     "edit": "Éditer",
     "delete": "Supprimer"
   },
@@ -78,6 +82,20 @@
     "saved": "Modifications enregistrées !",
     "save_error": "Erreur lors de l'enregistrement",
     "not_found": "Prestataire introuvable"
+  },
+  "role": {
+    "create_title": "Nouveau rôle",
+    "edit_title": "Modifier le rôle",
+    "saved": "Modifications enregistrées !",
+    "save_error": "Erreur lors de l'enregistrement",
+    "name": "Nom",
+    "not_found": "Rôle introuvable"
+  },
+  "permission": {
+    "create_title": "Nouvelle permission",
+    "edit_title": "Modifier la permission",
+    "save_error": "Erreur lors de l'enregistrement",
+    "name": "Nom"
   }
 }
   

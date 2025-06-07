@@ -10,11 +10,10 @@ import { useUploadProviderImageMutation } from '../../modules/provider/providerA
 export default function ProviderForm() {
   const { id } = useParams()
   const { data, submit, loading } = useProviderForm(id)
-  const { register, handleSubmit, reset, setValue, watch, formState } = useForm({ defaultValues: data })
+  const { register, handleSubmit, reset, setValue, watch } = useForm({ defaultValues: data })
   const { t } = useTranslation()
   const [feedback, setFeedback] = useState(null)
   const [uploadImage] = useUploadProviderImageMutation()
-  const { i18n } = useTranslation()
 
   React.useEffect(() => {
     if (data) reset(data)
