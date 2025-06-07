@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import logout from '../modules/auth/logout'
 import LogoMyPetly from '../assets/LogoMyPetly.png'
 import PeopleIcon from '@mui/icons-material/People'
-import BusinessIcon from '@mui/icons-material/Business' // Ou autre icône MUI pertinente
+import BusinessIcon from '@mui/icons-material/Business' 
 
 const drawerWidth = 220
 
