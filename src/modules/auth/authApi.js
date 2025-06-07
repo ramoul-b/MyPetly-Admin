@@ -2,8 +2,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logout } from './authSlice'
 
+const API_URL = (import.meta.env.VITE_API_URL ?? 'https://api.mypetly.co/api/v1').replace(/\/?$/, '/')
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_URL ?? 'https://api.mypetly.co/api/v1',
+  baseUrl: API_URL,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('access_token')
     console.log('→ prepareHeaders ▶ En‐tête Authorization ajouté :', token ? `Bearer ${token}` : 'aucun token')

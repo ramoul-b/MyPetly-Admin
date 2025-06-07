@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import useUserForm from '../../modules/users/useUserForm'
 import {
@@ -38,7 +38,7 @@ export default function UserForm () {
         if (res.photo_url) setValue('photo_url', res.photo_url)
       }
       setFeedback({ type: 'success', message: t('user.saved', 'Modifications enregistrées !') })
-    } catch (err) {
+    } catch {
       setFeedback({ type: 'error', message: t('user.save_error', 'Erreur lors de l\'enregistrement') })
     }
   }

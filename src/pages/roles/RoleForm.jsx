@@ -19,7 +19,7 @@ export default function RoleForm() {
     try {
       await submit(values)
       setFeedback({ type: 'success', message: t('role.saved', 'Saved!') })
-    } catch (err) {
+    } catch {
       setFeedback({ type: 'error', message: t('role.save_error', 'Save error') })
     }
   }

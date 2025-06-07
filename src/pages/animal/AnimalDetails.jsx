@@ -17,7 +17,6 @@ import { useGetAnimalQuery } from '../../modules/animals/animalsApi'
 import ThermostatIcon from '@mui/icons-material/Thermostat'
 import BloodtypeIcon from '@mui/icons-material/Bloodtype'
 import { Switch } from '@mui/material'
-import getPhotoUrl from '../../utils/getPhotoUrl'
 
 export default function AnimalDetails() {
   const nav = useNavigate()

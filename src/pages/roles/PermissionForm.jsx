@@ -23,7 +23,7 @@ export default function PermissionForm() {
       if (id) await updatePermission({ id, ...values }).unwrap()
       else await addPermission(values).unwrap()
       nav('/permissions')
-    } catch (err) {
+    } catch {
       setFeedback({ type: 'error', message: t('permission.save_error', 'Save error') })
     }
   }
