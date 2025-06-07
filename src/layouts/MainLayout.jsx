@@ -6,6 +6,7 @@ import {
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PetsIcon from '@mui/icons-material/Pets'
 import LogoutIcon from '@mui/icons-material/Logout'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LangSwitch from '../components/LangSwitch'
 import RoleBadge from '../components/RoleBadge'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +21,9 @@ const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
-  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> }
+  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
+  { label: 'Roles', path: '/roles', icon: <PeopleIcon /> },
+  { label: 'Permissions', path: '/permissions', icon: <BusinessIcon /> }
 ]
 
 
@@ -32,6 +35,8 @@ const pageTitles = {
   '/animals': t('page.animals', 'Animals'),
   '/providers': t('page.providers', 'Providers'),
   '/users': t('page.users', 'Users'),
+  '/roles': t('page.roles', 'Roles'),
+  '/permissions': t('page.permissions', 'Permissions'),
   // ajoute d'autres routes ici...
 }
 
@@ -124,6 +129,20 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
             
             </Tooltip>
             <RoleBadge />
+            <Tooltip title={t('button.profile')}>
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/profile"
+                sx={{
+                  bgcolor: 'rgba(255,255,255,0.09)',
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.20)' },
+                  boxShadow: 0
+                }}
+              >
+                <AccountCircleIcon />
+              </IconButton>
+            </Tooltip>
             <Tooltip title={t('button.logout')}>
   <IconButton
     color="inherit"
