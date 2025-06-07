@@ -4,6 +4,7 @@ import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
 import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/UsersList'
+import ProfilePage  from '../modules/profile/ProfilePage'
 import AnimalsList    from '../pages/animal/AnimalsList'
 import AnimalForm from '../pages/animal/AnimalForm'
 import AnimalDetails from '../pages/animal/AnimalDetails'
@@ -19,10 +20,15 @@ export default [
       </RequireAuth>
     ),
     children: [
-      {
+      { 
         index: true,
         element: <Dashboard />,
         handle: { title: 'dashboard' }
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
+        handle: { title: 'profile' }
       },
       {
         path: 'animals',
