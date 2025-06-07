@@ -17,6 +17,7 @@
     "profile": "Profile",
     "add_animal": "Add",
     "add_provider": "Add",
+    "add_service": "Add",
     "add_role": "Add",
     "add_permission": "Add",
     "edit": "Edit",
@@ -29,6 +30,7 @@
     "animals": "Animals",
     "users": "Users",
     "providers": "Providers",
+    "services": "Services",
     "roles": "Roles",
     "permissions": "Permissions"
 
@@ -98,6 +100,22 @@
     "saved": "Saved!",
     "save_error": "Save error",
     "not_found": "Provider not found"
+  },
+  "service": {
+    "create_title": "New service",
+    "edit_title": "Edit service",
+    "saved": "Saved!",
+    "save_error": "Save error",
+    "label": "Label",
+    "description": "Description",
+    "active": "Active",
+    "not_found": "Service not found",
+    "label_en": "Label (EN)",
+    "label_fr": "Label (FR)",
+    "label_it": "Label (IT)",
+    "desc_en": "Description (EN)",
+    "desc_fr": "Description (FR)",
+    "desc_it": "Description (IT)"
   },
   "role": {
     "create_title": "New role",

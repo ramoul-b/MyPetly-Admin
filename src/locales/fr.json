@@ -35,12 +35,14 @@
   "users": "Utilisateurs",
   "profile": "Mon profil",
   "providers": "Prestataires",
+  "services": "Services",
   "roles": "Rôles",
   "permissions": "Permissions"
   },
   "button": {
     "add_animal": "Ajouter",
     "add_provider": "Ajouter",
+    "add_service": "Ajouter",
     "add_role": "Ajouter",
     "add_permission": "Ajouter",
     "edit": "Éditer",
@@ -108,6 +110,22 @@
     "saved": "Modifications enregistrées !",
     "save_error": "Erreur lors de l'enregistrement",
     "not_found": "Prestataire introuvable"
+  },
+  "service": {
+    "create_title": "Nouveau service",
+    "edit_title": "Modifier le service",
+    "saved": "Modifications enregistrées !",
+    "save_error": "Erreur lors de l'enregistrement",
+    "label": "Libellé",
+    "description": "Description",
+    "active": "Actif",
+    "not_found": "Service introuvable",
+    "label_en": "Libellé (EN)",
+    "label_fr": "Libellé (FR)",
+    "label_it": "Libellé (IT)",
+    "desc_en": "Description (EN)",
+    "desc_fr": "Description (FR)",
+    "desc_it": "Description (IT)"
   },
   "role": {
     "create_title": "Nouveau rôle",

@@ -15,7 +15,8 @@ import logout from '../modules/auth/logout'
 import useAuth from '../modules/auth/useAuth'
 import LogoMyPetly from '../assets/LogoMyPetly.png'
 import PeopleIcon from '@mui/icons-material/People'
-import BusinessIcon from '@mui/icons-material/Business' 
+import BusinessIcon from '@mui/icons-material/Business'
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
 
 const drawerWidth = 220
 
@@ -24,6 +25,7 @@ const menu = [
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
+  { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon /> },
   { label: 'Roles', path: '/roles', icon: <PeopleIcon /> },
   { label: 'Permissions', path: '/permissions', icon: <BusinessIcon /> }
 ]
@@ -38,6 +40,7 @@ const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
   '/providers': t('page.providers', 'Providers'),
+  '/services': t('page.services', 'Services'),
   '/users': t('page.users', 'Users'),
   '/roles': t('page.roles', 'Roles'),
   '/permissions': t('page.permissions', 'Permissions'),

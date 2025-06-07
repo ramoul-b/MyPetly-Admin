@@ -35,12 +35,14 @@
   "users": "Utenti",
   "profile": "Il mio profilo",
   "providers": "Fornitori",
+  "services": "Servizi",
   "roles": "Ruoli",
   "permissions": "Permessi"
 },
   "button": {
     "add_animal": "Aggiungi",
     "add_provider": "Aggiungi",
+    "add_service": "Aggiungi",
     "add_role": "Aggiungi",
     "add_permission": "Aggiungi",
     "edit": "Modifica",
@@ -104,6 +106,22 @@
     "saved": "Salvato!",
     "save_error": "Errore di salvataggio",
     "not_found": "Fornitore non trovato"
+  },
+  "service": {
+    "create_title": "Nuovo servizio",
+    "edit_title": "Modifica servizio",
+    "saved": "Salvato!",
+    "save_error": "Errore di salvataggio",
+    "label": "Etichetta",
+    "description": "Descrizione",
+    "active": "Attivo",
+    "not_found": "Servizio non trovato",
+    "label_en": "Etichetta (EN)",
+    "label_fr": "Etichetta (FR)",
+    "label_it": "Etichetta (IT)",
+    "desc_en": "Descrizione (EN)",
+    "desc_fr": "Descrizione (FR)",
+    "desc_it": "Descrizione (IT)"
   },
   "role": {
     "create_title": "Nuovo ruolo",
