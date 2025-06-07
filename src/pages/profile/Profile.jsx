@@ -1,143 +1,174 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
-  Box,
-  Typography,
-  Avatar,
-  Chip,
-  Stack,
-  Button,
-  TextField,
-  Alert
+  Box, Stack, Typography, Tabs, Tab, TextField, Button, Divider, Snackbar, Alert, Switch
 } from '@mui/material'
-import dayjs from 'dayjs'
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
-import PhotoUploader from '../../components/PhotoUploader'
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
-  useChangePasswordMutation
+  useUploadProfilePhotoMutation,
+  useChangePasswordMutation,
+  useDeactivateAccountMutation,
+  useDeleteAccountMutation
 } from '../../modules/profile/profileApi'
+import PhotoUploader from '../../components/PhotoUploader'
 
-/**
- * User Profile page.
- * Displays the current user information in a card with an edit mode and
- * a separate section to change the password.
- */
 export default function Profile() {
-  const { t } = useTranslation()
-  const { data } = useGetProfileQuery()
-  const [updateProfile, updateStatus] = useUpdateProfileMutation()
-  const [changePassword, passwordStatus] = useChangePasswordMutation()
+  const [tab, setTab] = useState(0)
 
-  const [edit, setEdit] = useState(false)
-  const [feedback, setFeedback] = useState(null)
+  // Charger les infos utilisateur
+  const { data, isLoading, refetch } = useGetProfileQuery()
+  const user = data?.user || {}
+
+  // Formulaire profil
+  const { register, handleSubmit, setValue, watch, reset } = useForm({ defaultValues: user })
+  const [updateProfile] = useUpdateProfileMutation()
+  const [uploadProfilePhoto] = useUploadProfilePhotoMutation()
+  const [profileFeedback, setProfileFeedback] = useState(null)
+
+  // Formulaire mot de passe
+  const pwdForm = useForm()
+  const [changePassword] = useChangePasswordMutation()
   const [pwdFeedback, setPwdFeedback] = useState(null)
+  const [pwdLoading, setPwdLoading] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    reset
-  } = useForm()
-  const {
-    register: registerPwd,
-    handleSubmit: handleSubmitPwd,
-    reset: resetPwd
-  } = useForm()
+  // Actions compte
+  const [deactivateAccount] = useDeactivateAccountMutation()
+  const [deleteAccount] = useDeleteAccountMutation()
 
-  // When profile data arrives -> populate form
-  useEffect(() => {
-    if (data) {
-      reset(data)
-    }
-  }, [data, reset])
+  // Sync le formulaire si user change
+  React.useEffect(() => {
+    if (user && user.id) reset(user)
+  }, [user, reset])
 
-  const onSubmitProfile = async (values) => {
-    setFeedback(null)
+  // Sauvegarde profil + upload photo si besoin
+  const onSaveProfile = async (values) => {
+    let saved = false
     try {
-      const body = new FormData()
-      Object.entries(values).forEach(([k, v]) => {
-        if (v !== undefined && v !== null) body.append(k, v)
+      // 1. Maj info (hors photo)
+      await updateProfile(values).unwrap()
+      saved = true
+      // 2. Upload photo si changée
+      if (values.photo_url instanceof File || values.photo_url instanceof Blob) {
+        const res = await uploadProfilePhoto({ file: values.photo_url }).unwrap()
+        if (res.photo_url) setValue('photo_url', res.photo_url)
+        await refetch() // Recharge les données avec la nouvelle photo
+      }
+      setProfileFeedback({ type: 'success', msg: 'Profil mis à jour !' })
+    } catch {
+      setProfileFeedback({
+        type: 'error',
+        msg: saved ? 'Photo non enregistrée.' : 'Erreur, réessayez.'
       })
-      await updateProfile(body).unwrap()
-      setFeedback({ type: 'success', message: t('profile.update_success') })
-      setEdit(false)
-    } catch (e) {
-      const msg = e?.data?.message || e.error || 'Error'
-      setFeedback({ type: 'error', message: msg })
     }
   }
 
-  const onSubmitPassword = async (values) => {
-    setPwdFeedback(null)
+  // Changement de mot de passe
+  const onChangePwd = async (values) => {
+    setPwdLoading(true)
     try {
       await changePassword(values).unwrap()
-      setPwdFeedback({ type: 'success', message: t('profile.password_change_success') })
-      resetPwd()
-    } catch (e) {
-      const msg = e?.data?.message || e.error || 'Error'
-      setPwdFeedback({ type: 'error', message: msg })
+      setPwdFeedback({ type: 'success', msg: 'Mot de passe modifié !' })
+      pwdForm.reset()
+    } catch {
+      setPwdFeedback({ type: 'error', msg: 'Erreur, réessayez.' })
     }
+    setPwdLoading(false)
   }
 
-  if (!data) return null
+  if (isLoading) return <div>Chargement...</div>
 
   return (
-    <Box sx={{ maxWidth: 500, mx: 'auto', mt: 4 }}>
-      {/* Profile card */}
-      <Box sx={{ bgcolor: '#fff', p: 4, borderRadius: 3, boxShadow: 2 }}>
-        {edit ? (
-          <form onSubmit={handleSubmit(onSubmitProfile)} noValidate>
-            <Stack spacing={2} alignItems="center">
-              <PhotoUploader value={watch('photo')} onChange={(f) => setValue('photo', f)} size={110} />
-              <TextField label={t('profile.name')} {...register('name')} fullWidth />
-              <TextField label={t('profile.email')} {...register('email')} type="email" fullWidth />
-              <TextField label={t('profile.phone')} {...register('phone')} fullWidth />
-              <TextField label={t('profile.address')} {...register('address')} fullWidth />
-              {feedback && <Alert severity={feedback.type}>{feedback.message}</Alert>}
-              <Stack direction="row" spacing={2}>
-                <Button onClick={() => setEdit(false)}>{t('button.cancel')}</Button>
-                <Button variant="contained" type="submit" disabled={updateStatus.isLoading}>{t('button.save')}</Button>
-              </Stack>
-            </Stack>
-          </form>
-        ) : (
-          <Stack spacing={1} alignItems="center">
-            <Avatar src={data.photo} alt={data.name} sx={{ width: 110, height: 110, boxShadow: 2 }} />
-            <Typography variant="h5" fontWeight={700}>{data.name}</Typography>
-            <Typography>{data.email}</Typography>
-            <Typography>{data.phone}</Typography>
-            <Typography>{data.address}</Typography>
-            <Stack direction="row" spacing={1}>
-              {data.roles?.map(role => (
-                <Chip key={role} label={role} icon={<VerifiedUserIcon />} color="info" size="small" />
-              ))}
-            </Stack>
-            {data.created_at && (
-              <Typography variant="caption" color="text.secondary">
-                {t('profile.created_at')}: {dayjs(data.created_at).format('LL')}
-              </Typography>
-            )}
-            <Button variant="outlined" onClick={() => setEdit(true)} sx={{ mt: 1 }}>{t('button.edit')}</Button>
-          </Stack>
-        )}
+    <Box sx={{ display: 'flex', gap: 4, p: 4, flexWrap: 'wrap' }}>
+      {/* Colonne gauche - résumé */}
+      <Box sx={{
+        minWidth: 350, bgcolor: '#fff', borderRadius: 4, p: 4, boxShadow: 1,
+        display: 'flex', flexDirection: 'column', alignItems: 'center'
+      }}>
+        <PhotoUploader
+          value={watch('photo_url') || user.photo_url}
+          onChange={file => setValue('photo_url', file)}
+          label="Changer la photo"
+        />
+        <Typography variant="h5" fontWeight={700}>{user.name}</Typography>
+        <Typography color="text.secondary" sx={{ mb: 2 }}>{user.email}</Typography>
+        <Divider sx={{ my: 2, width: '100%' }} />
+        <Stack spacing={1} sx={{ width: '100%' }}>
+          <Typography variant="subtitle1" fontWeight={600}>Infos personnelles</Typography>
+          <Typography><b>Nom</b> : {user.name}</Typography>
+          <Typography><b>Email</b> : {user.email}</Typography>
+          <Typography><b>Téléphone</b> : {user.phone || '-'}</Typography>
+          <Typography><b>Adresse</b> : {user.address || '-'}</Typography>
+        </Stack>
       </Box>
 
-      {/* Change password section */}
-      <Box sx={{ bgcolor: '#fff', p: 4, borderRadius: 3, boxShadow: 2, mt: 4 }}>
-        <Typography variant="h6" mb={2}>{t('profile.change_password')}</Typography>
-        <form onSubmit={handleSubmitPwd(onSubmitPassword)} noValidate>
-          <Stack spacing={2}>
-            <TextField label={t('profile.current_password')} type="password" {...registerPwd('current_password')} fullWidth />
-            <TextField label={t('profile.new_password')} type="password" {...registerPwd('new_password')} fullWidth />
-            <TextField label={t('profile.confirm_password')} type="password" {...registerPwd('confirm_password')} fullWidth />
-            {pwdFeedback && <Alert severity={pwdFeedback.type}>{pwdFeedback.message}</Alert>}
-            <Button variant="contained" type="submit" disabled={passwordStatus.isLoading}>{t('button.save')}</Button>
+      {/* Colonne droite - édition et paramètres */}
+      <Box sx={{ flex: 1, bgcolor: '#fff', borderRadius: 4, p: 4, boxShadow: 1, minWidth: 340 }}>
+        <Tabs value={tab} onChange={(_, val) => setTab(val)}>
+          <Tab label="Editer Profil" />
+          <Tab label="Mot de passe" />
+          <Tab label="Paramètres" />
+        </Tabs>
+        <Divider sx={{ mb: 3 }} />
+
+        {/* Onglet édition du profil */}
+        {tab === 0 && (
+          <Box component="form" onSubmit={handleSubmit(onSaveProfile)}>
+            <Stack spacing={2} sx={{ maxWidth: 500 }}>
+              <TextField label="Nom" {...register('name', { required: true })} fullWidth />
+              <TextField label="Email" {...register('email', { required: true })} type="email" fullWidth />
+              <TextField label="Téléphone" {...register('phone')} fullWidth />
+              <TextField label="Adresse" {...register('address')} fullWidth />
+              <Stack direction="row" spacing={2} justifyContent="flex-end">
+                <Button type="submit" variant="contained">Sauvegarder</Button>
+              </Stack>
+            </Stack>
+          </Box>
+        )}
+
+        {/* Onglet mot de passe */}
+        {tab === 1 && (
+          <Box component="form" onSubmit={pwdForm.handleSubmit(onChangePwd)}>
+            <Stack spacing={2} sx={{ maxWidth: 400, mt: 2 }}>
+              <TextField label="Nouveau mot de passe" type="password" {...pwdForm.register('new_password', { required: true })} />
+              <TextField label="Confirmer mot de passe" type="password" {...pwdForm.register('confirm_password', { required: true })} />
+              <Button type="submit" variant="contained" disabled={pwdLoading}>Changer</Button>
+            </Stack>
+          </Box>
+        )}
+
+        {/* Onglet paramètres */}
+        {tab === 2 && (
+          <Stack spacing={3} sx={{ maxWidth: 400, mt: 4 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Typography>Recevoir les notifications</Typography>
+              <Switch checked />
+            </Stack>
+            <Divider />
+            <Button
+              variant="outlined"
+              color="warning"
+              onClick={() => deactivateAccount()}
+            >
+              Désactiver le compte
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => deleteAccount()}
+            >
+              Supprimer le compte
+            </Button>
           </Stack>
-        </form>
+        )}
+
+        {/* Feedbacks */}
+        <Snackbar open={!!profileFeedback} autoHideDuration={3000} onClose={() => setProfileFeedback(null)}>
+          {profileFeedback && <Alert severity={profileFeedback.type}>{profileFeedback.msg}</Alert>}
+        </Snackbar>
+        <Snackbar open={!!pwdFeedback} autoHideDuration={3000} onClose={() => setPwdFeedback(null)}>
+          {pwdFeedback && <Alert severity={pwdFeedback.type}>{pwdFeedback.msg}</Alert>}
+        </Snackbar>
       </Box>
     </Box>
   )

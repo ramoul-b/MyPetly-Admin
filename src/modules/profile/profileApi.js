@@ -11,8 +11,23 @@ export const profileApi = createApi({
       providesTags: ['Profile']
     }),
     updateProfile: b.mutation({
-      query: (body) => ({ url: 'account/profile', method: 'POST', body }),
-      invalidatesTags: ['Profile']
+      query: ({ id, ...data }) => ({
+        url: `/users/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Profile'],
+    }),
+    uploadProfilePhoto: b.mutation({
+      query: ({ file }) => {
+        const form = new FormData()
+        form.append('photo', file)
+        return {
+          url: '/account/profile/photo',
+          method: 'POST',
+          body: form,
+        }
+      },
     }),
     changePassword: b.mutation({
       query: (body) => ({ url: 'update-password', method: 'POST', body })
@@ -31,5 +46,6 @@ export const {
   useUpdateProfileMutation,
   useChangePasswordMutation,
   useDeactivateAccountMutation,
-  useDeleteAccountMutation
+  useDeleteAccountMutation,
+  useUploadProfilePhotoMutation
 } = profileApi

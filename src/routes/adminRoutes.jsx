@@ -3,7 +3,7 @@ import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
 import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/UsersList'
-import ProfilePage  from '../modules/profile/ProfilePage'
+//import ProfilePage  from '../modules/profile/ProfilePage'
 import AnimalsList    from '../pages/animal/AnimalsList'
 import AnimalForm from '../pages/animal/AnimalForm'
 import AnimalDetails from '../pages/animal/AnimalDetails'
@@ -17,7 +17,7 @@ import RoleForm from '../pages/roles/RoleForm'
 import RoleDetails from '../pages/roles/RoleDetails'
 import PermissionsList from '../pages/roles/PermissionsList'
 import PermissionForm from '../pages/roles/PermissionForm'
-import Profile from '../pages/profile/Profile'
+import ProfilePage from '../pages/profile/Profile'
 
 
 export default [
