@@ -45,7 +45,7 @@ export default function AnimalForm () {
         if (res.photo_url) setValue('photo_url', res.photo_url)
       }
       setFeedback({ type: 'success', message: t('animal.saved', 'Modifications enregistrées !') })
-    } catch (error) {
+    } catch {
       console.error(error)
       setFeedback({ type: 'error', message: t('animal.save_error', "Erreur lors de l'enregistrement") })
     }

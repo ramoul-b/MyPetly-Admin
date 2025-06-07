@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { authApi } from '../modules/auth/authApi'
 import authReducer from '../modules/auth/authSlice'
 import { animalsApi } from '../modules/animals/animalsApi'
+import { profileApi } from '../modules/profile/profileApi'
 import { usersApi } from '../modules/users/usersApi'
 import { providerApi } from '../modules/provider/providerApi'
 import { rolesApi } from '../modules/roles/rolesApi'
@@ -13,12 +14,15 @@ export default configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [providerApi.reducerPath]: providerApi.reducer,
     [rolesApi.reducerPath]: rolesApi.reducer,
+    [profileApi.reducerPath]: profileApi.reducer,
     auth: authReducer
   },
   middleware: (getDefault) =>
-    getDefault()
-      .concat(authApi.middleware, animalsApi.middleware)
-      .concat(usersApi.middleware)
+    getDefault().concat(
+      authApi.middleware,
+      animalsApi.middleware,
+      profileApi.middleware
+    ).concat(usersApi.middleware)
       .concat(providerApi.middleware)
       .concat(rolesApi.middleware)
 })

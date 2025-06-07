@@ -33,10 +33,10 @@
   "dashboard": "Tableau de bord",
   "animals": "Animaux",
   "users": "Utilisateurs",
+  "profile": "Mon profil"
   "providers": "Prestataires",
   "roles": "Rôles",
   "permissions": "Permissions",
-  "profile": "Profil"
   },
   "button": {
     "add_animal": "Ajouter",
@@ -72,7 +72,31 @@
     "birthdate": "Date de naissance"
   },
   "button": {
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "profile": "Mon profil",
+    "cancel": "Annuler"
+  },
+  "profile": {
+    "title": "Mon profil",
+    "name": "Nom",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "roles": "Rôles",
+    "created_at": "Créé le",
+    "updated_at": "Mis à jour le",
+    "update_success": "Profil mis à jour",
+    "update_error": "Erreur de mise à jour",
+    "change_password": "Changer le mot de passe",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "password_change_success": "Mot de passe modifié",
+    "password_change_error": "Erreur lors du changement",
+    "deactivate": "Désactiver mon compte",
+    "delete": "Supprimer mon compte",
+    "confirm_deactivation": "Confirmer la désactivation ?",
+    "confirm_delete": "Confirmer la suppression du compte ?"
   }
   ,"provider": {
     "name": "Nom",

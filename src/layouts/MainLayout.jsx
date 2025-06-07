@@ -1,7 +1,8 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import {
   AppBar, Toolbar, Typography, Drawer, List, ListItemButton,
-  ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha
+  ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha, Avatar, Menu, MenuItem
 } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PetsIcon from '@mui/icons-material/Pets'
@@ -11,6 +12,7 @@ import LangSwitch from '../components/LangSwitch'
 import RoleBadge from '../components/RoleBadge'
 import { useTranslation } from 'react-i18next'
 import logout from '../modules/auth/logout'
+import useAuth from '../modules/auth/useAuth'
 import LogoMyPetly from '../assets/LogoMyPetly.png'
 import PeopleIcon from '@mui/icons-material/People'
 import BusinessIcon from '@mui/icons-material/Business' 
@@ -30,6 +32,8 @@ const menu = [
 export default function MainLayout() {
   const { pathname } = useLocation()
   const { t } = useTranslation()
+  const { user } = useAuth()
+  const [anchor, setAnchor] = useState(null)
 const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
@@ -124,11 +128,19 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
           <Box sx={{ flexGrow: 1 }} />
 
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Tooltip title={t('button.language')}  placement="left">
+            <Tooltip title={t('button.language')} placement="left">
               <Box><LangSwitch /></Box>
-            
             </Tooltip>
             <RoleBadge />
+            <IconButton onClick={(e) => setAnchor(e.currentTarget)} sx={{ p: 0 }}>
+              <Avatar src={user?.photo} />
+            </IconButton>
+            <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}>
+              <MenuItem component={Link} to="/profile" onClick={() => setAnchor(null)}>
+                {t('button.profile')}
+              </MenuItem>
+              <MenuItem onClick={logout}>{t('button.logout')}</MenuItem>
+            </Menu>
             <Tooltip title={t('button.profile')}>
               <IconButton
                 color="inherit"

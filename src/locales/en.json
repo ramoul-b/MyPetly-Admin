@@ -20,8 +20,8 @@
     "add_role": "Add",
     "add_permission": "Add",
     "edit": "Edit",
-    "delete": "Delete"
-
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "page": {
     "not_found": "Page not found",
@@ -31,7 +31,7 @@
     "providers": "Providers",
     "roles": "Roles",
     "permissions": "Permissions",
-    "profile": "Profile"
+
   },
     "roles": {
     "super_admin": "Super Admin",
@@ -67,13 +67,32 @@
     "birthdate": "Date de naissance"
   },
   "button": {
-    "save": "Enregistrer"
+    "save": "Save",
+    "profile": "My Profile"
+  },
+  "profile": {
+    "title": "My Profile",
   },
   "provider": {
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
     "address": "Address",
+    "roles": "Roles",
+    "created_at": "Created",
+    "updated_at": "Updated",
+    "update_success": "Profile updated",
+    "update_error": "Update error",
+    "change_password": "Change password",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "confirm_password": "Confirm password",
+    "password_change_success": "Password changed",
+    "password_change_error": "Password change error",
+    "deactivate": "Deactivate my account",
+    "delete": "Delete my account",
+    "confirm_deactivation": "Confirm deactivation?",
+    "confirm_delete": "Confirm account deletion?"
     "create_title": "New provider",
     "edit_title": "Edit provider",
     "saved": "Saved!",
