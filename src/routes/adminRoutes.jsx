@@ -3,7 +3,6 @@ import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
 import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/UsersList'
-//import ProfilePage  from '../modules/profile/ProfilePage'
 import AnimalsList    from '../pages/animal/AnimalsList'
 import AnimalForm from '../pages/animal/AnimalForm'
 import AnimalDetails from '../pages/animal/AnimalDetails'
@@ -21,6 +20,10 @@ import RoleDetails from '../pages/roles/RoleDetails'
 import PermissionsList from '../pages/roles/PermissionsList'
 import PermissionForm from '../pages/roles/PermissionForm'
 import ProfilePage from '../pages/profile/Profile'
+import BookingsList from '../pages/bookings/BookingsList'
+import BookingForm from '../pages/bookings/BookingForm'
+import BookingDetails from '../pages/bookings/BookingDetails'
+import BookingCalendar from '../pages/bookings/BookingCalendar'
 
 
 export default [
@@ -75,6 +78,16 @@ export default [
           { path: 'create', element: <RoleForm /> },
           { path: ':id/edit', element: <RoleForm /> },
           { path: ':id', element: <RoleDetails /> }
+        ]
+      },
+      {
+        path: 'bookings',
+        children: [
+          { index: true, element: <BookingsList /> },
+          { path: 'calendar', element: <BookingCalendar /> },
+          { path: 'create', element: <BookingForm /> },
+          { path: ':id/edit', element: <BookingForm /> },
+          { path: ':id', element: <BookingDetails /> }
         ]
       },
       {

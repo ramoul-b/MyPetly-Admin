@@ -1,29 +1,43 @@
-import { api } from '../api'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { baseQueryWithRefresh } from '../auth/authApi'
 
-export const bookingsApi = api.injectEndpoints({
-  endpoints: (builder) => ({
-    getBookings: builder.query({
-      query: (params) => ({ url: '/bookings', params }),
+export const bookingsApi = createApi({
+  reducerPath: 'bookingsApi',
+  baseQuery: baseQueryWithRefresh,
+  tagTypes: ['Booking'],
+  endpoints: (b) => ({
+    listBookings: b.query({
+      query: () => 'bookings',
+      providesTags: ['Booking']
     }),
-    getBooking: builder.query({
-      query: (id) => `/bookings/${id}`,
+    getBooking: b.query({
+      query: (id) => `bookings/${id}`,
+      providesTags: (result, error, id) => [{ type: 'Booking', id }]
     }),
-    createBooking: builder.mutation({
-      query: (data) => ({ url: '/bookings', method: 'POST', body: data }),
+    addBooking: b.mutation({
+      query: (body) => ({ url: 'bookings', method: 'POST', body }),
+      invalidatesTags: ['Booking']
     }),
-    updateBooking: builder.mutation({
-      query: ({ id, ...data }) => ({ url: `/bookings/${id}`, method: 'PUT', body: data }),
+    updateBooking: b.mutation({
+      query: ({ id, ...body }) => ({
+        url: `bookings/${id}`,
+        method: 'PUT',
+        body,
+        ...(body instanceof FormData ? {} : { headers: { 'Content-Type': 'application/json' } })
+      }),
+      invalidatesTags: ['Booking']
     }),
-    deleteBooking: builder.mutation({
-      query: (id) => ({ url: `/bookings/${id}`, method: 'DELETE' }),
+    deleteBooking: b.mutation({
+      query: (id) => ({ url: `bookings/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Booking']
     }),
-  }),
+  })
 })
 
 export const {
-  useGetBookingsQuery,
+  useListBookingsQuery,
   useGetBookingQuery,
-  useCreateBookingMutation,
+  useAddBookingMutation,
   useUpdateBookingMutation,
-  useDeleteBookingMutation,
+  useDeleteBookingMutation
 } = bookingsApi

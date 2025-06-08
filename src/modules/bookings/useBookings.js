@@ -1,10 +1,6 @@
-import { useGetBookingsQuery } from './bookingsApi'
+import { useListBookingsQuery } from './bookingsApi'
 
-export default function useBookings(filters = {}) {
-  const { data, error, isLoading } = useGetBookingsQuery(filters)
-  return {
-    bookings: data?.data || [],
-    loading: isLoading,
-    error,
-  }
+export default function useBookings() {
+  const { data = [], isLoading, error, refetch } = useListBookingsQuery()
+  return { bookings: data, isLoading, error, refetch }
 }

@@ -7,6 +7,7 @@ import { usersApi } from '../modules/users/usersApi'
 import { providerApi } from '../modules/provider/providerApi'
 import { rolesApi } from '../modules/roles/rolesApi'
 import { servicesApi } from '../modules/services/servicesApi'
+import { bookingsApi } from '../modules/bookings/bookingsApi'
 
 export default configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
     [rolesApi.reducerPath]: rolesApi.reducer,
     [servicesApi.reducerPath]: servicesApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
+    [bookingsApi.reducerPath]: bookingsApi.reducer,
     auth: authReducer
   },
   middleware: (getDefault) =>
@@ -28,4 +30,5 @@ export default configureStore({
       .concat(providerApi.middleware)
       .concat(rolesApi.middleware)
       .concat(servicesApi.middleware)
+      .concat(bookingsApi.middleware)
 })
