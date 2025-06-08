@@ -14,15 +14,36 @@ import {
 } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import Switch from '@mui/material/Switch'
 
 export default function ServiceForm () {
+  
   const { id } = useParams()
+  const defaultLangObj = { en: '', fr: '', it: '' }
   const { data, submit, loading } = useServiceForm(id)
-  const { register, handleSubmit, reset } = useForm({ defaultValues: data })
+  console.log('data ServiceForm:', data)
+
+  const defaultValues = {
+    name: { ...defaultLangObj, ...data?.name },
+    description: { ...defaultLangObj, ...data?.description },
+    active: data?.active ?? true
+  }
+  const { register, handleSubmit, setValue, watch, reset } = useForm({ defaultValues })
+
   const { t } = useTranslation()
   const [feedback, setFeedback] = useState(null)
 
-  React.useEffect(() => { if (data) reset(data) }, [data, reset])
+  React.useEffect(() => {
+    if (data) {
+      reset({
+        name: { ...defaultLangObj, ...data.name },
+        description: { ...defaultLangObj, ...data.description },
+        active: data.active // ← correction ici
+      })
+    }
+  }, [data, reset])
+
+
 
   const onSubmit = async (values) => {
     setFeedback(null)
@@ -55,9 +76,9 @@ export default function ServiceForm () {
           {id ? t('service.edit_title', 'Edit service') : t('service.create_title', 'New service')}
         </Typography>
 
-        <TextField label={t('service.label_en', 'Label (EN)')} {...register('label.en')} fullWidth />
-        <TextField label={t('service.label_fr', 'Label (FR)')} {...register('label.fr')} fullWidth />
-        <TextField label={t('service.label_it', 'Label (IT)')} {...register('label.it')} fullWidth />
+        <TextField label={t('service.label_en', 'Name (EN)')} {...register('name.en')} fullWidth />
+        <TextField label={t('service.label_fr', 'Name (FR)')} {...register('name.fr')} fullWidth />
+        <TextField label={t('service.label_it', 'Name (IT)')} {...register('name.it')} fullWidth />
 
         <TextField
           label={t('service.desc_en', 'Description (EN)')}
@@ -81,8 +102,16 @@ export default function ServiceForm () {
           minRows={3}
         />
 
-        <FormControlLabel control={<Checkbox {...register('is_active')} />} label={t('service.active', 'Active')} />
-
+        <FormControlLabel
+          control={
+            <Switch
+              color="primary"
+              checked={!!watch('active')}
+              onChange={e => setValue('active', e.target.checked)}
+            />
+          }
+          label={t('service.active', 'Active')}
+        />
         {feedback && <Alert severity={feedback.type}>{feedback.message}</Alert>}
 
         <Button variant="contained" size="large" type="submit" disabled={loading} sx={{ fontWeight: 600 }}>

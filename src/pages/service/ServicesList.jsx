@@ -8,6 +8,9 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded'
+
 
 export default function ServicesList () {
   const { services, isLoading, refetch } = useServices()
@@ -21,13 +24,18 @@ export default function ServicesList () {
       field: 'label',
       headerName: t('service.label', 'Label'),
       flex: 1,
-      renderCell: params => params.row.label?.[i18n.language] || params.row.label?.en || ''
+      renderCell: params => params.row.name?.[i18n.language] || params.row.name?.en || ''
     },
     {
-      field: 'is_active',
+      field: 'active',
       headerName: t('service.active', 'Active'),
       width: 100,
-      renderCell: params => params.row.is_active ? '✓' : '✗'
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: params =>
+        params.row.active
+          ? <CheckCircleRoundedIcon color="success" />
+          : <CancelRoundedIcon color="disabled" />
     },
     {
       field: 'actions',

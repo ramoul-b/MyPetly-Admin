@@ -2,6 +2,8 @@ import { Box, Typography, Stack, Button, Paper } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetServiceQuery } from '../../modules/services/servicesApi'
 import { useTranslation } from 'react-i18next'
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded'
 
 export default function ServiceDetails() {
   const nav = useNavigate()
@@ -19,11 +21,19 @@ export default function ServiceDetails() {
       </Button>
       <Paper elevation={3} sx={{ borderRadius: 4, p: 4 }}>
         <Typography variant="h4" fontWeight={700}>
-          {data.label?.[i18n.language] || data.label?.en}
+          {data.name?.[i18n.language] || data.name?.en}
         </Typography>
+
         <Stack spacing={1} mt={2}>
           <Typography>{data.description?.[i18n.language] || data.description?.en}</Typography>
-          <Typography>{t('service.active', 'Active')}: {data.is_active ? '✓' : '✗'}</Typography>
+          <Typography>
+            {t('service.active', 'Active')}: {data.active ? (
+              <CheckCircleRoundedIcon color="success" sx={{ verticalAlign: 'middle' }} />
+            ) : (
+              <CancelRoundedIcon color="disabled" sx={{ verticalAlign: 'middle' }} />
+            )}
+          </Typography>
+
         </Stack>
       </Paper>
       <Button

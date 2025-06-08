@@ -9,6 +9,8 @@ import {
 
 export default function useServiceForm(id) {
   const { data } = useGetServiceQuery(id, { skip: !id })
+  //console.log('Service API data:', data)
+
   const [addService, addStatus] = useAddServiceMutation()
   const [updateService, updateStatus] = useUpdateServiceMutation()
   const [assignProviders] = useAssignProvidersMutation()
