@@ -107,7 +107,8 @@
     "edit_title": "Modifier le prestataire",
     "saved": "Modifications enregistrées !",
     "save_error": "Erreur lors de l'enregistrement",
-    "not_found": "Prestataire introuvable"
+    "not_found": "Prestataire introuvable",
+    "services_offered": "Services proposés"
   },
   "service": {
     "create_title": "Nouveau service",
@@ -138,6 +139,11 @@
     "edit_title": "Modifier la permission",
     "save_error": "Erreur lors de l'enregistrement",
     "name": "Nom"
+  },
+  "provider_service": {
+    "price": "Prix",
+    "duration": "Durée",
+    "available": "Disponible"
   }
 }
   

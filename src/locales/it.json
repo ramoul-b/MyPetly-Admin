@@ -103,7 +103,8 @@
     "edit_title": "Modifica fornitore",
     "saved": "Salvato!",
     "save_error": "Errore di salvataggio",
-    "not_found": "Fornitore non trovato"
+    "not_found": "Fornitore non trovato",
+    "services_offered": "Servizi offerti"
   },
   "service": {
     "create_title": "Nuovo servizio",
@@ -134,6 +135,11 @@
     "edit_title": "Modifica permesso",
     "save_error": "Errore di salvataggio",
     "name": "Nome"
+  },
+  "provider_service": {
+    "price": "Prezzo",
+    "duration": "Durata",
+    "available": "Disponibile"
   }
 }
   
