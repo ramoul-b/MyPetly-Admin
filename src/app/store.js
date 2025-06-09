@@ -8,7 +8,10 @@ import { providerApi } from '../modules/provider/providerApi'
 import { rolesApi } from '../modules/roles/rolesApi'
 import { servicesApi } from '../modules/services/servicesApi'
 import { collarsApi } from '../modules/collars/collarsApi'
+import { providerServicesApi } from '../modules/providerServices/providerServicesApi'
 import { bookingsApi } from '../modules/bookings/bookingsApi'
+    [providerServicesApi.reducerPath]: providerServicesApi.reducer,
+      .concat(providerServicesApi.middleware)
 import { categoriesApi } from '../modules/services/categoriesApi'
 
 export default configureStore({

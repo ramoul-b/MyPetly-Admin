@@ -36,6 +36,7 @@
   "profile": "Mon profil",
   "providers": "Prestataires",
   "services": "Services",
+  "provider_services": "Services proposés",
   "roles": "Rôles",
   "permissions": "Permissions"
   },

@@ -31,6 +31,7 @@
     "users": "Users",
     "providers": "Providers",
     "services": "Services",
+    "provider_services": "Provider Services",
     "roles": "Roles",
     "permissions": "Permissions"
 

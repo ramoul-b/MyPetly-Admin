@@ -22,6 +22,8 @@ import CategoryIcon from '@mui/icons-material/Category'
 import LinkIcon from '@mui/icons-material/Link'
 
 
+  { label: 'Provider Services', path: '/provider-services', icon: <MiscellaneousServicesIcon /> },
+  '/provider-services': t('page.provider_services', 'Provider Services'),
 const drawerWidth = 220
 
 const menu = [
