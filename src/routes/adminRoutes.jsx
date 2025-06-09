@@ -14,6 +14,9 @@ import ProviderDetails from '../pages/provider/ProviderDetails'
 import ServicesList from '../pages/service/ServicesList'
 import ServiceForm from '../pages/service/ServiceForm'
 import ServiceDetails from '../pages/service/ServiceDetails'
+import CategoriesList from '../pages/category/CategoriesList'
+import CategoryForm from '../pages/category/CategoryForm'
+import CategoryDetails from '../pages/category/CategoryDetails'
 import RolesList from '../pages/roles/RolesList'
 import RoleForm from '../pages/roles/RoleForm'
 import RoleDetails from '../pages/roles/RoleDetails'
@@ -68,7 +71,16 @@ export default [
           { index: true, element: <ServicesList /> },
           { path: 'create', element: <ServiceForm /> },
           { path: ':id/edit', element: <ServiceForm /> },
-          { path: ':id', element: <ServiceDetails /> }
+      { path: ':id', element: <ServiceDetails /> }
+        ]
+      },
+      {
+        path: 'categories',
+        children: [
+          { index: true, element: <CategoriesList /> },
+          { path: 'create', element: <CategoryForm /> },
+          { path: ':id/edit', element: <CategoryForm /> },
+          { path: ':id', element: <CategoryDetails /> }
         ]
       },
       {
