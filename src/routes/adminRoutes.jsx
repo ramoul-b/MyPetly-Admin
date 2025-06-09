@@ -27,6 +27,9 @@ import BookingsList from '../pages/bookings/BookingsList'
 import BookingForm from '../pages/bookings/BookingForm'
 import BookingDetails from '../pages/bookings/BookingDetails'
 import BookingCalendar from '../pages/bookings/BookingCalendar'
+import CollarsList from '../pages/collar/CollarsList'
+import CollarForm from '../pages/collar/CollarForm'
+import CollarDetails from '../pages/collar/CollarDetails'
 
 
 export default [
@@ -52,9 +55,18 @@ export default [
         children: [
           { index: true, element: <AnimalsList /> },
           { path: 'create', element: <AnimalForm /> },
-        { path: ':id/edit', element: <AnimalForm /> },
-        { path: ':id', element: <AnimalDetails /> },
-      ]
+          { path: ':id/edit', element: <AnimalForm /> },
+          { path: ':id', element: <AnimalDetails /> },
+        ]
+      },
+      {
+        path: 'collars',
+        children: [
+          { index: true, element: <CollarsList /> },
+          { path: 'create', element: <CollarForm /> },
+          { path: ':id/edit', element: <CollarForm /> },
+          { path: ':id', element: <CollarDetails /> }
+        ]
       },
       {
         path: 'providers',

@@ -12,8 +12,10 @@ import CancelIcon from '@mui/icons-material/Cancel'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
 import EventIcon from '@mui/icons-material/Event'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useNavigate, useParams, useLocation, Link } from 'react-router-dom'
 import { useGetAnimalQuery } from '../../modules/animals/animalsApi'
+import useCollars from '../../modules/collars/useCollars'
+import LinkIcon from '@mui/icons-material/Link'
 import ThermostatIcon from '@mui/icons-material/Thermostat'
 import BloodtypeIcon from '@mui/icons-material/Bloodtype'
 import { Switch } from '@mui/material'
@@ -22,6 +24,7 @@ export default function AnimalDetails() {
   const nav = useNavigate()
   const { id } = useParams()
   const { data, isLoading } = useGetAnimalQuery(id)
+  const { collars = [], isLoading: loadingCollars } = useCollars({ animal_id: id })
   const location = useLocation()
   const updatedPhoto = location.state?.updatedPhoto
 
@@ -244,6 +247,32 @@ export default function AnimalDetails() {
           </CardBlock>
         </Stack>
       </Stack>
+
+      <CardBlock
+        icon={<LinkIcon sx={{ color: '#5c6bc0' }} />}
+        title="Colliers"
+        color="#e8eaf6"
+      >
+        {loadingCollars ? (
+          <Typography>Chargement…</Typography>
+        ) : collars.length === 0 ? (
+          <Typography color="text.disabled">Aucun collier</Typography>
+        ) : (
+          <Stack spacing={1}>
+            {collars.map(c => (
+              <Button
+                key={c.id}
+                component={Link}
+                to={`/collars/${c.id}`}
+                variant="outlined"
+                size="small"
+              >
+                {c.nfc_id || `Collar #${c.id}`}
+              </Button>
+            ))}
+          </Stack>
+        )}
+      </CardBlock>
 
       <Button
         variant="contained"

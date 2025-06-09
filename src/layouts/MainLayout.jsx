@@ -19,12 +19,15 @@ import BusinessIcon from '@mui/icons-material/Business'
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
 import ScheduleIcon from '@mui/icons-material/Schedule'
 import CategoryIcon from '@mui/icons-material/Category'
+import LinkIcon from '@mui/icons-material/Link'
+
 
 const drawerWidth = 220
 
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
+  { label: 'Collars', path: '/collars', icon: <LinkIcon /> },
   { label: 'Users', path: '/users', icon: <PeopleIcon /> },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
   { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon /> },
@@ -43,6 +46,7 @@ export default function MainLayout() {
 const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
+  '/collars': t('page.collars', 'Collars'),
   '/providers': t('page.providers', 'Providers'),
   '/services': t('page.services', 'Services'),
   '/categories': t('page.categories', 'Categories'),
