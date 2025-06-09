@@ -74,6 +74,4 @@ D’après le dossier [`src/modules`](../src/modules) et les pages associées :
 
 Les tags restants dans `docs/api-docs.json` concernent `Paiement/Stripe`, `Provider Services` et `Reviews` qui ne sont pas encore implémentés.
 
----
-
 Ce rapport présente l’état actuel du projet : la structure suit bien la standardisation décrite, un thème MUI personnalisé est en place et huit modules fonctionnels ont été développés. Les modules restants pourront s’appuyer sur le même modèle pour compléter les fonctionnalités prévues dans la documentation API.
