@@ -157,3 +157,29 @@
 4. Gérer les providers associés depuis la fiche service
 
 ---
+
+## 📂 Endpoints Catégories
+
+Les services peuvent être rattachés à une ou plusieurs catégories. Ces catégories disposent de labels multilingues et d'informations visuelles (icône, couleur).
+
+| Action                    | Méthode | Endpoint              | Description                                   |
+| ------------------------- | ------- | -------------------- | --------------------------------------------- |
+| Lister les catégories     | GET     | `/categories`         | Retourne la liste des catégories disponibles  |
+| Créer une catégorie       | POST    | `/categories`         | Ajoute une nouvelle catégorie multilingue     |
+| Détails d'une catégorie   | GET     | `/categories/{id}`    | Informations complètes d'une catégorie        |
+| Mettre à jour une catégorie | PUT   | `/categories/{id}`    | Modifie nom, icône ou couleur                 |
+| Supprimer une catégorie   | DELETE  | `/categories/{id}`    | Suppression définitive d'une catégorie        |
+
+### Structure type d'une catégorie
+
+```json
+{
+  "id": 1,
+  "name": { "fr": "Toilettage", "en": "Grooming" },
+  "type": "service",
+  "icon": "icon.png",
+  "color": "#ffcc00",
+  "created_at": "...",
+  "updated_at": "..."
+}
+```
