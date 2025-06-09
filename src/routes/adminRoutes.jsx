@@ -69,21 +69,12 @@ export default [
         ]
       },
       {
-        path: 'providers',
-        children: [
-          { index: true, element: <ProvidersList /> },
-          { path: 'create', element: <ProviderForm /> },
-          { path: ':id/edit', element: <ProviderForm /> },
-      { path: ':id', element: <ProviderDetails /> }
-        ]
-      },
-      {
         path: 'services',
         children: [
           { index: true, element: <ServicesList /> },
           { path: 'create', element: <ServiceForm /> },
           { path: ':id/edit', element: <ServiceForm /> },
-      { path: ':id', element: <ServiceDetails /> }
+          { path: ':id', element: <ServiceDetails /> }
         ]
       },
       {
