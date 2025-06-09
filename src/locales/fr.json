@@ -37,7 +37,9 @@
   "providers": "Prestataires",
   "services": "Services",
   "roles": "Rôles",
-  "permissions": "Permissions"
+  "permissions": "Permissions",
+  "collars": "Colliers",
+  "categories": "Catégories"
   },
   "button": {
     "add_animal": "Ajouter",
@@ -47,10 +49,6 @@
     "add_permission": "Ajouter",
     "edit": "Éditer",
     "delete": "Supprimer"
-  },
-  "animal": {
-    "name": "Nom",
-    "species": "Espèce"
   },
   "table": {
     "actions": "Actions"

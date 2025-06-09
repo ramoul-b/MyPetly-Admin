@@ -32,20 +32,18 @@
     "providers": "Providers",
     "services": "Services",
     "roles": "Roles",
-    "permissions": "Permissions"
+    "permissions": "Permissions",
+    "collars": "Collars",
+    "categories": "Categories"
 
   },
-    "roles": {
+  "roles": {
     "super_admin": "Super Admin",
     "admin": "Admin",
     "manager": "Manager",
     "moderator": "Moderator",
     "provider": "Provider",
     "support": "Support"
-  },
-    "animal": {
-    "name": "Name",
-    "species": "Species"
   },
     "table": {
     "actions": "Actions"
