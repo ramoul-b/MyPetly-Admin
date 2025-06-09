@@ -28,9 +28,10 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-
-      console.log('Roles reçus  →', payload.user.roles)
-      console.log('Permissions →', payload.user.permissions)
+      if (import.meta.env.DEV) {
+        console.debug('Roles reçus  →', payload.user.roles)
+        console.debug('Permissions →', payload.user.permissions)
+      }
 
       state.token = payload.access_token     
       state.user  = payload.user

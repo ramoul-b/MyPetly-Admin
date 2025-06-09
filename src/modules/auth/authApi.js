@@ -7,7 +7,12 @@ const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('access_token')
-    console.log('→ prepareHeaders ▶ En‐tête Authorization ajouté :', token ? `Bearer ${token}` : 'aucun token')
+    if (import.meta.env.DEV) {
+      console.debug(
+        '→ prepareHeaders ▶ En‐tête Authorization ajouté :',
+        token ? `Bearer ${token}` : 'aucun token'
+      )
+    }
     if (token) headers.set('authorization', `Bearer ${token}`)
     return headers
   }
@@ -16,19 +21,19 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithRefresh = async (args, api, extra) => {
   let result = await baseQuery(args, api, extra)
   if (result.error?.status === 401 && !args.url?.includes('login')) {
-    console.log('→ 401 reçue, tentative de refresh-token …')
+    if (import.meta.env.DEV) console.debug('→ 401 reçue, tentative de refresh-token …')
     const refresh = await baseQuery(
       { url: 'refresh-token', method: 'POST' },
       api,
       extra
     )
     if (refresh.data?.access_token) {
-      console.log('→ Refresh‐token réussi, nouveau token :', refresh.data.access_token)
+      if (import.meta.env.DEV) console.debug('→ Refresh‐token réussi, nouveau token :', refresh.data.access_token)
       localStorage.setItem('access_token', refresh.data.access_token)
       api.dispatch(setCredentials(refresh.data))
       result = await baseQuery(args, api, extra)
     } else {
-      console.warn('→ Échec du refresh, déconnexion.')
+      console.error('→ Échec du refresh, déconnexion.')
       api.dispatch(logout())
     }
   }
@@ -47,7 +52,7 @@ export const authApi = createApi({
           localStorage.setItem('access_token', data.access_token)
           // Optionnel : api.dispatch(setCredentials(data))
         } catch (e) {
-          console.log(e);
+          console.error(e)
         }
       }
     }),
