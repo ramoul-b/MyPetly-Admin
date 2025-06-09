@@ -97,7 +97,8 @@
     "edit_title": "Edit provider",
     "saved": "Saved!",
     "save_error": "Save error",
-    "not_found": "Provider not found"
+    "not_found": "Provider not found",
+    "services_offered": "Services offered"
   },
   "service": {
     "create_title": "New service",
@@ -128,6 +129,10 @@
     "edit_title": "Edit permission",
     "save_error": "Save error",
     "name": "Name"
+  },
+  "provider_service": {
+    "price": "Price",
+    "duration": "Duration",
+    "available": "Available"
   }
-}
-  
+  }

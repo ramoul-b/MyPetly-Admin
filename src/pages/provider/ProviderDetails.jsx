@@ -1,6 +1,9 @@
-import { Box, Typography, Stack, Button } from '@mui/material'
+import { Box, Typography, Stack, Button, Paper, IconButton } from '@mui/material'
+import { DataGrid } from '@mui/x-data-grid'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProviderQuery } from '../../modules/provider/providerApi'
+import useProviderServices from '../../modules/providerServices/useProviderServices'
 import { useTranslation } from 'react-i18next'
 
 
@@ -8,6 +11,7 @@ export default function ProviderDetails() {
   const nav = useNavigate()
   const { id } = useParams()
   const { data, isLoading } = useGetProviderQuery(id)
+  const { providerServices, isLoading: loadingServices } = useProviderServices(id)
   const { t } = useTranslation()
   const { i18n } = useTranslation()
 
@@ -15,7 +19,7 @@ export default function ProviderDetails() {
   if (!data) return <div>{t('provider.not_found', 'Not found')}</div>
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto' }}>
+    <Box sx={{ maxWidth: 700, mx: 'auto' }}>
       <Button variant="outlined" onClick={() => nav('/providers')} sx={{ mb: 2 }}>
         {t('button.back', 'Back')}
       </Button>
@@ -32,6 +36,54 @@ export default function ProviderDetails() {
           {t('button.edit', 'Edit')}
         </Button>
       </Stack>
+
+      <Typography variant="h6" sx={{ mt: 4, mb: 1 }}>
+        {t('provider.services_offered', 'Services offered')}
+      </Typography>
+      <Paper sx={{ height: 400, p: 1 }}>
+        <DataGrid
+          rows={providerServices}
+          loading={loadingServices}
+          columns={[
+            { field: 'id', headerName: 'ID', width: 70 },
+            {
+              field: 'service',
+              headerName: t('service.label', 'Label'),
+              flex: 1,
+              renderCell: params => (
+                <Button
+                  color="info"
+                  onClick={() => nav(`/services/${params.row.service?.id}`)}
+                >
+                  {params.row.service?.name?.[i18n.language] || params.row.service?.name?.en || ''}
+                </Button>
+              )
+            },
+            { field: 'price', headerName: t('provider_service.price', 'Price'), width: 100 },
+            { field: 'duration', headerName: t('provider_service.duration', 'Duration'), width: 110 },
+            {
+              field: 'available',
+              headerName: t('provider_service.available', 'Available'),
+              width: 110,
+              type: 'boolean'
+            },
+            {
+              field: 'actions',
+              headerName: t('table.actions', 'Actions'),
+              width: 90,
+              renderCell: params => (
+                <IconButton color="info" onClick={() => nav(`/services/${params.row.service?.id}`)}>
+                  <VisibilityIcon />
+                </IconButton>
+              )
+            }
+          ]}
+          pageSize={10}
+          rowsPerPageOptions={[5,10,20]}
+          getRowId={row => row.id}
+          disableSelectionOnClick
+        />
+      </Paper>
     </Box>
   )
 }
