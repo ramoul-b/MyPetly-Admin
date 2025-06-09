@@ -8,7 +8,7 @@ import store from './app/store'
 import App from './App'
 import './i18n'
 
-console.log("⚛️ React démarre");
+if (import.meta.env.DEV) console.debug('⚛️ React démarre')
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>

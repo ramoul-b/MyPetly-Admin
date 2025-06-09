@@ -21,7 +21,7 @@ export default function ServiceForm () {
   const { id } = useParams()
   const defaultLangObj = { en: '', fr: '', it: '' }
   const { data, submit, loading } = useServiceForm(id)
-  console.log('data ServiceForm:', data)
+  if (import.meta.env.DEV) console.debug('data ServiceForm:', data)
 
   const defaultValues = {
     name: { ...defaultLangObj, ...data?.name },

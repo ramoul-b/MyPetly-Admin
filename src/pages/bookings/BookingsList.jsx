@@ -14,7 +14,7 @@ export default function BookingsList() {
   const [deleteBooking] = useDeleteBookingMutation()
   const nav = useNavigate()
   const { t } = useTranslation()
-  console.log("Data booking : ", bookings)
+  if (import.meta.env.DEV) console.debug('Data booking : ', bookings)
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
