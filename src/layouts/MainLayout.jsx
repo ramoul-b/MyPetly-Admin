@@ -26,15 +26,15 @@ const drawerWidth = 220
 
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
-  { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
-  { label: 'Collars', path: '/collars', icon: <LinkIcon /> },
+  { label: 'Animals', path: '/animals', icon: <PetsIcon />, permissions: ['animals.read'] },
+  { label: 'Collars', path: '/collars', icon: <LinkIcon />, permissions: ['collars.read'] },
   { label: 'Users', path: '/users', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
-  { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon /> },
-  { label: 'Categories', path: '/categories', icon: <CategoryIcon /> },
+  { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['services.read'] },
+  { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['categories.read'] },
   { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
-  { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon /> }
+  { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['bookings.read'] }
 ]
 
 
