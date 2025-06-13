@@ -1,6 +1,7 @@
 import MainLayout   from '../layouts/MainLayout'
 import RequireAuth  from '../modules/auth/RequireAuth'
 import RequireRole  from '../modules/auth/RequireRole'
+import RequirePerm  from '../modules/auth/RequirePerm'
 import Dashboard    from '../pages/Dashboard'
 import UsersList    from '../pages/users/UsersList'
 import AnimalsList    from '../pages/animal/AnimalsList'
@@ -53,64 +54,64 @@ export default [
       {
         path: 'animals',
         children: [
-          { index: true, element: <AnimalsList /> },
-          { path: 'create', element: <AnimalForm /> },
-          { path: ':id/edit', element: <AnimalForm /> },
-          { path: ':id', element: <AnimalDetails /> },
+          { index: true, element: <RequirePerm allowed="animals.read"><AnimalsList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="animals.create"><AnimalForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="animals.edit"><AnimalForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="animals.read"><AnimalDetails /></RequirePerm> },
         ]
       },
       {
         path: 'collars',
         children: [
-          { index: true, element: <CollarsList /> },
-          { path: 'create', element: <CollarForm /> },
-          { path: ':id/edit', element: <CollarForm /> },
-          { path: ':id', element: <CollarDetails /> }
+          { index: true, element: <RequirePerm allowed="collars.read"><CollarsList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="collars.create"><CollarForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="collars.edit"><CollarForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="collars.read"><CollarDetails /></RequirePerm> }
         ]
       },
       {
         path: 'services',
         children: [
-          { index: true, element: <ServicesList /> },
-          { path: 'create', element: <ServiceForm /> },
-          { path: ':id/edit', element: <ServiceForm /> },
-          { path: ':id', element: <ServiceDetails /> }
+          { index: true, element: <RequirePerm allowed="services.read"><ServicesList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="services.create"><ServiceForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="services.edit"><ServiceForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="services.read"><ServiceDetails /></RequirePerm> }
         ]
       },
       {
         path: 'categories',
         children: [
-          { index: true, element: <CategoriesList /> },
-          { path: 'create', element: <CategoryForm /> },
-          { path: ':id/edit', element: <CategoryForm /> },
-          { path: ':id', element: <CategoryDetails /> }
+          { index: true, element: <RequirePerm allowed="categories.read"><CategoriesList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="categories.create"><CategoryForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="categories.edit"><CategoryForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="categories.read"><CategoryDetails /></RequirePerm> }
         ]
       },
       {
         path: 'roles',
         children: [
-          { index: true, element: <RolesList /> },
-          { path: 'create', element: <RoleForm /> },
-          { path: ':id/edit', element: <RoleForm /> },
-          { path: ':id', element: <RoleDetails /> }
+          { index: true, element: <RequireRole allowed={['super_admin']}><RolesList /></RequireRole> },
+          { path: 'create', element: <RequireRole allowed={['super_admin']}><RoleForm /></RequireRole> },
+          { path: ':id/edit', element: <RequireRole allowed={['super_admin']}><RoleForm /></RequireRole> },
+          { path: ':id', element: <RequireRole allowed={['super_admin']}><RoleDetails /></RequireRole> }
         ]
       },
       {
         path: 'bookings',
         children: [
-          { index: true, element: <BookingsList /> },
-          { path: 'calendar', element: <BookingCalendar /> },
-          { path: 'create', element: <BookingForm /> },
-          { path: ':id/edit', element: <BookingForm /> },
-          { path: ':id', element: <BookingDetails /> }
+          { index: true, element: <RequirePerm allowed="bookings.read"><BookingsList /></RequirePerm> },
+          { path: 'calendar', element: <RequirePerm allowed="bookings.read"><BookingCalendar /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="bookings.create"><BookingForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="bookings.edit"><BookingForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="bookings.read"><BookingDetails /></RequirePerm> }
         ]
       },
       {
         path: 'permissions',
         children: [
-          { index: true, element: <PermissionsList /> },
-          { path: 'create', element: <PermissionForm /> },
-          { path: ':id/edit', element: <PermissionForm /> }
+          { index: true, element: <RequireRole allowed={['super_admin']}><PermissionsList /></RequireRole> },
+          { path: 'create', element: <RequireRole allowed={['super_admin']}><PermissionForm /></RequireRole> },
+          { path: ':id/edit', element: <RequireRole allowed={['super_admin']}><PermissionForm /></RequireRole> }
         ]
       },
       {
