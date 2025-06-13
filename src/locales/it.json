@@ -141,5 +141,9 @@
     "duration": "Durata",
     "available": "Disponibile"
   }
-}
+ ,
+  "errors": {
+    "unauthorized_action": "Non sei autorizzato a eseguire questa azione."
+  }
+ }
   

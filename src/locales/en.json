@@ -134,5 +134,8 @@
     "price": "Price",
     "duration": "Duration",
     "available": "Available"
+  },
+  "errors": {
+    "unauthorized_action": "You are not authorized to perform this action."
   }
   }

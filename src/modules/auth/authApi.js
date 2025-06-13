@@ -1,6 +1,8 @@
 // src/modules/auth/authApi.js
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logout } from './authSlice'
+import { showAlert } from '../../app/uiSlice'
+import i18n from '../../i18n'
 
 const API_URL = (import.meta.env.VITE_API_URL ?? 'https://api.mypetly.co/api/v1').replace(/\/?$/, '/')
 const baseQuery = fetchBaseQuery({
@@ -36,6 +38,12 @@ const baseQueryWithRefresh = async (args, api, extra) => {
       console.error('→ Échec du refresh, déconnexion.')
       api.dispatch(logout())
     }
+  }
+  if (result.error?.status === 403) {
+    const msg =
+      result.error.data?.errors?.message ||
+      i18n.t('errors.unauthorized_action', 'You are not authorized to perform this action.')
+    api.dispatch(showAlert({ message: msg, type: 'error' }))
   }
   return result
 }

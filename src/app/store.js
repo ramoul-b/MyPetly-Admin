@@ -11,6 +11,7 @@ import { providerServicesApi } from '../modules/providerServices/providerService
 import { collarsApi } from '../modules/collars/collarsApi'
 import { bookingsApi } from '../modules/bookings/bookingsApi'
 import { categoriesApi } from '../modules/services/categoriesApi'
+import uiReducer from './uiSlice'
 
 export default configureStore({
   reducer: {
@@ -25,7 +26,8 @@ export default configureStore({
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [bookingsApi.reducerPath]: bookingsApi.reducer,
-    auth: authReducer
+    auth: authReducer,
+    ui: uiReducer
   },
   middleware: (getDefault) =>
     getDefault().concat(
