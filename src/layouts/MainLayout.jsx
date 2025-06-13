@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   AppBar, Toolbar, Typography, Drawer, List, ListItemButton,
   ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha, Avatar, Menu, MenuItem
@@ -28,12 +28,12 @@ const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon /> },
   { label: 'Collars', path: '/collars', icon: <LinkIcon /> },
-  { label: 'Users', path: '/users', icon: <PeopleIcon /> },
-  { label: 'Providers', path: '/providers', icon: <BusinessIcon /> },
+  { label: 'Users', path: '/users', icon: <PeopleIcon />, roles: ['super_admin'] },
+  { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon /> },
   { label: 'Categories', path: '/categories', icon: <CategoryIcon /> },
-  { label: 'Roles', path: '/roles', icon: <PeopleIcon /> },
-  { label: 'Permissions', path: '/permissions', icon: <BusinessIcon /> },
+  { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
+  { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon /> }
 ]
 
@@ -41,8 +41,16 @@ const menu = [
 export default function MainLayout() {
   const { pathname } = useLocation()
   const { t } = useTranslation()
-  const { user } = useAuth()
+  const { user, is, can } = useAuth()
   const [anchor, setAnchor] = useState(null)
+  const allowedMenu = useMemo(
+    () => menu.filter(m => {
+      const roleOk = !m.roles || m.roles.some(r => is(r))
+      const permOk = !m.permissions || m.permissions.some(p => can(p))
+      return roleOk && permOk
+    }),
+    [is, can]
+  )
 const pageTitles = {
   '/': t('page.dashboard', 'Dashboard'),
   '/animals': t('page.animals', 'Animals'),
@@ -84,7 +92,7 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
           <img src={LogoMyPetly} alt="Logo" width="100%" />
         </Toolbar>
         <List sx={{ mt: 2 }}>
-          {menu.map(m => (
+          {allowedMenu.map(m => (
             <ListItemButton
               key={m.path}
               component={Link}
