@@ -32,9 +32,13 @@ export default function MainLayout() {
   const { t } = useTranslation()
   const { is, can } = useAuth()
 
-  const servicesLabel = can('view_any_service')
+  const servicesLabel = is('super_admin') || is('admin')
     ? t('page.services', 'Services')
     : t('page.my_services', 'My Services')
+
+  const servicesPath = is('super_admin') || is('admin')
+  ? '/services'
+  : '/my-services'  
 
   const menu = [
     { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
@@ -42,7 +46,7 @@ export default function MainLayout() {
     { label: 'Collars', path: '/collars', icon: <LinkIcon />, permissions: ['view_any_collar', 'view_own_collar'] },
     { label: 'Users', path: '/users', icon: <PeopleIcon />, roles: ['super_admin'] },
     { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
-    { label: servicesLabel, path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['view_any_service', 'view_own_service'] },
+    { label: servicesLabel, path: servicesPath, icon: <MiscellaneousServicesIcon />, permissions: ['view_any_service', 'view_own_service'] },
     { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['view_any_category', 'view_own_category'] },
     { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
     { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
