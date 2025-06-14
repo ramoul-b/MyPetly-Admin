@@ -1,38 +1,3 @@
-import MainLayout   from '../layouts/MainLayout'
-import RequireAuth  from '../modules/auth/RequireAuth'
-import RequireRole  from '../modules/auth/RequireRole'
-import RequirePerm  from '../modules/auth/RequirePerm'
-import Dashboard    from '../pages/Dashboard'
-import UsersList    from '../pages/users/UsersList'
-import AnimalsList    from '../pages/animal/AnimalsList'
-import AnimalForm from '../pages/animal/AnimalForm'
-import AnimalDetails from '../pages/animal/AnimalDetails'
-import UserDetails from '../pages/users/UserDetails' 
-import UserForm from '../pages/users/UserForm'   
-import ProvidersList from '../pages/provider/ProvidersList'
-import ProviderForm from '../pages/provider/ProviderForm'
-import ProviderDetails from '../pages/provider/ProviderDetails'
-import ServicesList from '../pages/service/ServicesList'
-import ServiceForm from '../pages/service/ServiceForm'
-import ServiceDetails from '../pages/service/ServiceDetails'
-import CategoriesList from '../pages/category/CategoriesList'
-import CategoryForm from '../pages/category/CategoryForm'
-import CategoryDetails from '../pages/category/CategoryDetails'
-import RolesList from '../pages/roles/RolesList'
-import RoleForm from '../pages/roles/RoleForm'
-import RoleDetails from '../pages/roles/RoleDetails'
-import PermissionsList from '../pages/roles/PermissionsList'
-import PermissionForm from '../pages/roles/PermissionForm'
-import ProfilePage from '../pages/profile/Profile'
-import BookingsList from '../pages/bookings/BookingsList'
-import BookingForm from '../pages/bookings/BookingForm'
-import BookingDetails from '../pages/bookings/BookingDetails'
-import BookingCalendar from '../pages/bookings/BookingCalendar'
-import CollarsList from '../pages/collar/CollarsList'
-import CollarForm from '../pages/collar/CollarForm'
-import CollarDetails from '../pages/collar/CollarDetails'
-
-
 export default [
   {
     element: (
@@ -54,37 +19,37 @@ export default [
       {
         path: 'animals',
         children: [
-          { index: true, element: <RequirePerm allowed="animals.read"><AnimalsList /></RequirePerm> },
-          { path: 'create', element: <RequirePerm allowed="animals.create"><AnimalForm /></RequirePerm> },
-          { path: ':id/edit', element: <RequirePerm allowed="animals.edit"><AnimalForm /></RequirePerm> },
-          { path: ':id', element: <RequirePerm allowed="animals.read"><AnimalDetails /></RequirePerm> },
+          { index: true, element: <RequirePerm allowed="view_any_animal"><AnimalsList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="create_animal"><AnimalForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="edit_any_animal"><AnimalForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="view_any_animal"><AnimalDetails /></RequirePerm> },
         ]
       },
       {
         path: 'collars',
         children: [
-          { index: true, element: <RequirePerm allowed="collars.read"><CollarsList /></RequirePerm> },
-          { path: 'create', element: <RequirePerm allowed="collars.create"><CollarForm /></RequirePerm> },
-          { path: ':id/edit', element: <RequirePerm allowed="collars.edit"><CollarForm /></RequirePerm> },
-          { path: ':id', element: <RequirePerm allowed="collars.read"><CollarDetails /></RequirePerm> }
+          { index: true, element: <RequirePerm allowed="view_any_collar"><CollarsList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="create_collar"><CollarForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="edit_any_collar"><CollarForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="view_any_collar"><CollarDetails /></RequirePerm> }
         ]
       },
       {
         path: 'services',
         children: [
-          { index: true, element: <RequirePerm allowed="services.read"><ServicesList /></RequirePerm> },
-          { path: 'create', element: <RequirePerm allowed="services.create"><ServiceForm /></RequirePerm> },
-          { path: ':id/edit', element: <RequirePerm allowed="services.edit"><ServiceForm /></RequirePerm> },
-          { path: ':id', element: <RequirePerm allowed="services.read"><ServiceDetails /></RequirePerm> }
+          { index: true, element: <RequirePerm allowed="view_any_service"><ServicesList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="create_service"><ServiceForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="edit_any_service"><ServiceForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="view_any_service"><ServiceDetails /></RequirePerm> }
         ]
       },
       {
         path: 'categories',
         children: [
-          { index: true, element: <RequirePerm allowed="categories.read"><CategoriesList /></RequirePerm> },
-          { path: 'create', element: <RequirePerm allowed="categories.create"><CategoryForm /></RequirePerm> },
-          { path: ':id/edit', element: <RequirePerm allowed="categories.edit"><CategoryForm /></RequirePerm> },
-          { path: ':id', element: <RequirePerm allowed="categories.read"><CategoryDetails /></RequirePerm> }
+          { index: true, element: <RequirePerm allowed="view_any_category"><CategoriesList /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="create_category"><CategoryForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="edit_any_category"><CategoryForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="view_any_category"><CategoryDetails /></RequirePerm> }
         ]
       },
       {
@@ -99,11 +64,11 @@ export default [
       {
         path: 'bookings',
         children: [
-          { index: true, element: <RequirePerm allowed="bookings.read"><BookingsList /></RequirePerm> },
-          { path: 'calendar', element: <RequirePerm allowed="bookings.read"><BookingCalendar /></RequirePerm> },
-          { path: 'create', element: <RequirePerm allowed="bookings.create"><BookingForm /></RequirePerm> },
-          { path: ':id/edit', element: <RequirePerm allowed="bookings.edit"><BookingForm /></RequirePerm> },
-          { path: ':id', element: <RequirePerm allowed="bookings.read"><BookingDetails /></RequirePerm> }
+          { index: true, element: <RequirePerm allowed="view_any_booking"><BookingsList /></RequirePerm> },
+          { path: 'calendar', element: <RequirePerm allowed="view_any_booking"><BookingCalendar /></RequirePerm> },
+          { path: 'create', element: <RequirePerm allowed="create_booking"><BookingForm /></RequirePerm> },
+          { path: ':id/edit', element: <RequirePerm allowed="edit_any_booking"><BookingForm /></RequirePerm> },
+          { path: ':id', element: <RequirePerm allowed="view_any_booking"><BookingDetails /></RequirePerm> }
         ]
       },
       {

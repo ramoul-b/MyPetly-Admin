@@ -27,15 +27,16 @@ const drawerWidth = 220
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
   { label: 'Animals', path: '/animals', icon: <PetsIcon />, permissions: ['view_any_animal', 'view_own_animal'] },
-  { label: 'Collars', path: '/collars', icon: <LinkIcon />, permissions: ['collars.read'] },
+  { label: 'Collars', path: '/collars', icon: <LinkIcon />, permissions: ['view_any_collar', 'view_own_collar'] },
   { label: 'Users', path: '/users', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
-  { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['services.read'] },
-  { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['categories.read'] },
+  { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['view_any_service', 'view_own_service'] },
+  { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['view_any_category', 'view_own_category'] },
   { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
-  { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['bookings.read'] }
+  { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['view_any_booking', 'view_own_booking'] }
 ]
+
 
 
 export default function MainLayout() {
@@ -152,15 +153,7 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
               <Box><LangSwitch /></Box>
             </Tooltip>
             <RoleBadge />
-            <IconButton onClick={(e) => setAnchor(e.currentTarget)} sx={{ p: 0 }}>
-              <Avatar src={user?.photo} />
-            </IconButton>
-            <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}>
-              <MenuItem component={Link} to="/profile" onClick={() => setAnchor(null)}>
-                {t('button.profile')}
-              </MenuItem>
-              <MenuItem onClick={logout}>{t('button.logout')}</MenuItem>
-            </Menu>
+           
             <Tooltip title={t('button.profile')}>
               <IconButton
                 color="inherit"
