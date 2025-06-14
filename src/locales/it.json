@@ -40,12 +40,13 @@
   "permissions": "Permessi",
   "collars": "Collari",
   "categories": "Categorie",
-    "my_services": "I miei servizi"
+  "my_services": "I miei servizi"
   },
   "button": {
     "add_animal": "Aggiungi",
     "add_provider": "Aggiungi",
     "add_service": "Aggiungi",
+    "add_provider_service": "Aggiungi",
     "add_role": "Aggiungi",
     "add_permission": "Aggiungi",
     "edit": "Modifica",
