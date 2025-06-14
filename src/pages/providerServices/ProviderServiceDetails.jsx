@@ -22,7 +22,7 @@ export default function ProviderServiceDetails() {
   if (!data) return <div>{t('provider_service.not_found', 'Not found')}</div>
 
   const handleDelete = async () => {
-    if (window.confirm(t('confirm.delete', 'Confirm deletion?'))) {
+    if (window.confirm(t('confirm_delete', 'Confirm deletion?'))) {
       await remove()
       nav('/services')
     }
