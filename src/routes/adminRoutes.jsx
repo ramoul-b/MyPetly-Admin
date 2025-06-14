@@ -158,14 +158,6 @@ export default [
   path: 'my-services',
   element: <RequirePerm allowed="view_own_provider_service"><MyServicesList /></RequirePerm>
 },
-{
-  path: 'provider-services/:id',
-  element: (
-    <RequirePerm allowed="view_own_provider_service">
-      <ProviderServiceDetails />
-    </RequirePerm>
-  )
-},
 
       {
         path: 'providers',
