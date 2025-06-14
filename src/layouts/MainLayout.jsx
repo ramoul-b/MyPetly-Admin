@@ -26,7 +26,7 @@ const drawerWidth = 220
 
 const menu = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
-  { label: 'Animals', path: '/animals', icon: <PetsIcon />, permissions: ['animals.read'] },
+  { label: 'Animals', path: '/animals', icon: <PetsIcon />, permissions: ['view_any_animal', 'view_own_animal'] },
   { label: 'Collars', path: '/collars', icon: <LinkIcon />, permissions: ['collars.read'] },
   { label: 'Users', path: '/users', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
