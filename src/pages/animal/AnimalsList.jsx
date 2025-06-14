@@ -8,12 +8,14 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'react-i18next'
 import Visibility from '@mui/icons-material/Visibility'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function AnimalsList () {
   const { animals, isLoading, refetch } = useAnimals()
   const [deleteAnimal] = useDeleteAnimalMutation()
   const nav = useNavigate()
   const { t } = useTranslation()
+  const { can } = useAuth()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -32,23 +34,27 @@ export default function AnimalsList () {
       >
         <Visibility />
       </IconButton>
-          <IconButton
-            color="primary"
-            onClick={() => nav(`/animals/${params.row.id}/edit`)}
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            color="error"
-            onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
-                await deleteAnimal(params.row.id)
-                refetch()
-              }
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {can('animals.edit') && (
+            <IconButton
+              color="primary"
+              onClick={() => nav(`/animals/${params.row.id}/edit`)}
+            >
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('animals.delete') && (
+            <IconButton
+              color="error"
+              onClick={async () => {
+                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                  await deleteAnimal(params.row.id)
+                  refetch()
+                }
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -57,15 +63,17 @@ export default function AnimalsList () {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/animals/create')}
-        >
-          {t('button.add_animal', 'Ajouter')}
-        </Button>
+        {can('animals.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/animals/create')}
+          >
+            {t('button.add_animal', 'Ajouter')}
+          </Button>
+        )}
       </Box>
       <Box 
   sx={{ 

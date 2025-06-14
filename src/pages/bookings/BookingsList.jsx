@@ -8,12 +8,14 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Visibility from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function BookingsList() {
   const { bookings, isLoading, refetch } = useBookings()
   const [deleteBooking] = useDeleteBookingMutation()
   const nav = useNavigate()
   const { t } = useTranslation()
+  const { can } = useAuth()
   if (import.meta.env.DEV) console.debug('Data booking : ', bookings)
 
   const columns = [
@@ -91,17 +93,21 @@ export default function BookingsList() {
           <IconButton color="info" onClick={() => nav(`/bookings/${params.row.id}`)} title={t('booking.details', 'Voir le détail')}>
             <Visibility />
           </IconButton>
-          <IconButton color="primary" onClick={() => nav(`/bookings/${params.row.id}/edit`)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton color="error" onClick={async () => {
-            if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
-              await deleteBooking(params.row.id)
-              refetch()
-            }
-          }}>
-            <DeleteIcon />
-          </IconButton>
+          {can('bookings.edit') && (
+            <IconButton color="primary" onClick={() => nav(`/bookings/${params.row.id}/edit`)}>
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('bookings.delete') && (
+            <IconButton color="error" onClick={async () => {
+              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                await deleteBooking(params.row.id)
+                refetch()
+              }
+            }}>
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -110,15 +116,17 @@ export default function BookingsList() {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/bookings/create')}
-        >
-          {t('button.add_booking', 'Ajouter')}
-        </Button>
+        {can('bookings.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/bookings/create')}
+          >
+            {t('button.add_booking', 'Ajouter')}
+          </Button>
+        )}
         <Button
           variant="outlined"
           sx={{ ml: 2 }}
