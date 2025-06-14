@@ -9,7 +9,7 @@
   - `docs/` – documentation (API et modules)
 - Dans `src/` :
   - `app/` – configuration Redux store
-  - `api/` – baseQuery avec gestion du refresh token
+  - la logique API (baseQuery avec refresh token) se trouve dans `modules/auth/authApi.js`
   - `components/` – composants réutilisables (ex. `CrudTable`, `LangSwitch`)
   - `layouts/` – layout principal
   - `modules/` – logique métier par domaine
