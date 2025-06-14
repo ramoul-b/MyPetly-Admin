@@ -61,7 +61,7 @@ export default function ServicesList () {
             <IconButton
               color="error"
               onClick={async () => {
-                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                   await deleteService(params.row.id)
                   refetch()
                 }

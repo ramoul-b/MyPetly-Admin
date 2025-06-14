@@ -55,9 +55,7 @@
   "table": {
     "actions": "Actions"
   },
-  "confirm": {
-    "delete": "Confirmer la suppression ?"
-  },
+  "confirm_delete": "Confirmer la suppression ?",
   "animal": {
     "name": "Nom",
     "species": "Espèce",
