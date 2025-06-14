@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import {
   AppBar, Toolbar, Typography, Drawer, List, ListItemButton,
   ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha, Avatar, Menu, MenuItem
@@ -42,8 +42,7 @@ const menu = [
 export default function MainLayout() {
   const { pathname } = useLocation()
   const { t } = useTranslation()
-  const { user, is, can } = useAuth()
-  const [anchor, setAnchor] = useState(null)
+  const { is, can } = useAuth()
   const allowedMenu = useMemo(
     () => menu.filter(m => {
       const roleOk = !m.roles || m.roles.some(r => is(r))
