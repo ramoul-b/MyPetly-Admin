@@ -16,6 +16,7 @@ import ServicesList from '../pages/service/ServicesList'
 import ServiceForm from '../pages/service/ServiceForm'
 import ServiceDetails from '../pages/service/ServiceDetails'
 import MyServicesList from '../pages/providerServices/MyServicesList'
+import ProviderServiceDetails from '../pages/providerServices/ProviderServiceDetails'
 import CategoriesList from '../pages/category/CategoriesList'
 import CategoryForm from '../pages/category/CategoryForm'
 import CategoryDetails from '../pages/category/CategoryDetails'
@@ -59,6 +60,19 @@ export default [
         path: 'profile',
         element: <ProfilePage />,
         handle: { title: 'profile' }
+      },
+      {
+        path: 'my-services',
+        element: <RequireRole allowed={['provider']}><MyServices /></RequireRole>,
+        handle: { title: 'my_services' }
+      },
+      {
+        path: 'provider-services/:id',
+        element: (
+          <RequirePerm allowed="view_own_provider_service">
+            <ProviderServiceDetails />
+          </RequirePerm>
+        )
       },
       {
         path: 'animals',
