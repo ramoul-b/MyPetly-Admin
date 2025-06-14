@@ -153,15 +153,7 @@ const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
               <Box><LangSwitch /></Box>
             </Tooltip>
             <RoleBadge />
-            <IconButton onClick={(e) => setAnchor(e.currentTarget)} sx={{ p: 0 }}>
-              <Avatar src={user?.photo} />
-            </IconButton>
-            <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}>
-              <MenuItem component={Link} to="/profile" onClick={() => setAnchor(null)}>
-                {t('button.profile')}
-              </MenuItem>
-              <MenuItem onClick={logout}>{t('button.logout')}</MenuItem>
-            </Menu>
+           
             <Tooltip title={t('button.profile')}>
               <IconButton
                 color="inherit"
