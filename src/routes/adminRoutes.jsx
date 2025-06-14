@@ -63,7 +63,7 @@ export default [
       },
       {
         path: 'my-services',
-        element: <RequireRole allowed={['provider']}><MyServices /></RequireRole>,
+        element: <RequireRole allowed={['provider']}><MyServicesList /></RequireRole>,
         handle: { title: 'my_services' }
       },
       {
