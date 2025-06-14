@@ -9,9 +9,11 @@ import {
   useUpdateProviderServiceMutation
 } from '../../modules/providerServices/providerServicesApi'
 import { useListServicesQuery } from '../../modules/services/servicesApi'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function ProviderServiceForm({ open, onClose, initial }) {
   const { t, i18n } = useTranslation()
+  const { user } = useAuth()
   const { data: services = [] } = useListServicesQuery()
   const [addService] = useAddProviderServiceMutation()
   const [updateService] = useUpdateProviderServiceMutation()
@@ -23,7 +25,8 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
         service_id: initial.service_id,
         price: initial.price || '',
         duration: initial.duration || '',
-        available: !!initial.available
+        available: !!initial.available,
+        provider_id: initial.provider_id
       })
     } else {
       setValues({ service_id: '', price: '', duration: '', available: true })
@@ -40,7 +43,7 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
       if (initial && initial.id) {
         await updateService({ id: initial.id, ...values }).unwrap()
       } else {
-        await addService(values).unwrap()
+        await addService({ provider_id: user.provider_id, ...values }).unwrap()
       }
       onClose(true)
     } catch {
