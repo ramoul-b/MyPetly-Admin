@@ -50,7 +50,7 @@ export default function MyServicesList() {
               <VisibilityIcon />
             </IconButton>
           )}
-          {can('provider_services.edit') && (
+          {can('edit_own_provider_service') && (
             <IconButton color="primary" onClick={() => { setEditing(params.row); setOpen(true) }}>
               <EditIcon />
             </IconButton>
