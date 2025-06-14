@@ -62,11 +62,6 @@ export default [
         handle: { title: 'profile' }
       },
       {
-        path: 'my-services',
-        element: <RequireRole allowed={['provider']}><MyServicesList /></RequireRole>,
-        handle: { title: 'my_services' }
-      },
-      {
         path: 'provider-services/:id',
         element: (
           <RequirePerm allowed="view_own_provider_service">
