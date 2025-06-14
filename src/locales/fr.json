@@ -39,7 +39,8 @@
   "roles": "Rôles",
   "permissions": "Permissions",
   "collars": "Colliers",
-  "categories": "Catégories"
+  "categories": "Catégories",
+    "my_services": "Mes services"
   },
   "button": {
     "add_animal": "Ajouter",

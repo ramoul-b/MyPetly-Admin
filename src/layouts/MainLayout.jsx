@@ -1,8 +1,8 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import {
   AppBar, Toolbar, Typography, Drawer, List, ListItemButton,
-  ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha, Avatar, Menu, MenuItem
+  ListItemIcon, ListItemText, Box, IconButton, CssBaseline, Stack, Tooltip, alpha
 } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PetsIcon from '@mui/icons-material/Pets'
@@ -32,6 +32,7 @@ const menu = [
   { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['view_any_service', 'view_own_service'] },
   { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['view_any_category', 'view_own_category'] },
+  { label: 'My services', path: '/my-services', icon: <MiscellaneousServicesIcon />, roles: ['provider'] },
   { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['view_any_booking', 'view_own_booking'] }
@@ -42,8 +43,7 @@ const menu = [
 export default function MainLayout() {
   const { pathname } = useLocation()
   const { t } = useTranslation()
-  const { user, is, can } = useAuth()
-  const [anchor, setAnchor] = useState(null)
+  const { is, can } = useAuth()
   const allowedMenu = useMemo(
     () => menu.filter(m => {
       const roleOk = !m.roles || m.roles.some(r => is(r))
@@ -59,6 +59,7 @@ const pageTitles = {
   '/providers': t('page.providers', 'Providers'),
   '/services': t('page.services', 'Services'),
   '/categories': t('page.categories', 'Categories'),
+  '/my-services': t('page.my_services', 'My services'),
   '/users': t('page.users', 'Users'),
   '/roles': t('page.roles', 'Roles'),
   '/permissions': t('page.permissions', 'Permissions'),

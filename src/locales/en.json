@@ -34,7 +34,8 @@
     "roles": "Roles",
     "permissions": "Permissions",
     "collars": "Collars",
-    "categories": "Categories"
+    "categories": "Categories",
+    "my_services": "My services"
 
   },
   "roles": {

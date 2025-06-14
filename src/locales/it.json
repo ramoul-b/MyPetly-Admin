@@ -39,7 +39,8 @@
   "roles": "Ruoli",
   "permissions": "Permessi",
   "collars": "Collari",
-  "categories": "Categorie"
+  "categories": "Categorie",
+    "my_services": "I miei servizi"
   },
   "button": {
     "add_animal": "Aggiungi",
