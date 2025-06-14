@@ -1,9 +1,8 @@
 // src/modules/auth/AuthProvider.jsx
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
-
-const AuthContext = createContext(null)
+import { AuthContext } from './authContext'
 
 export function AuthProvider({ children }) {
   const dispatch = useDispatch()
@@ -57,8 +56,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   )
-}
-
-export function useAuthContext() {
-  return useContext(AuthContext)
 }
