@@ -55,7 +55,7 @@ export default function MyServicesList() {
               <EditIcon />
             </IconButton>
           )}
-          {can('provider_services.delete') && (
+          {can('delete_own_provider_service') && (
             <IconButton color="error" onClick={async () => {
               if (window.confirm(t('confirm.delete', 'Confirm deletion?'))) {
                 await deleteService(params.row.id)
@@ -73,7 +73,7 @@ export default function MyServicesList() {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        {can('provider_services.create') && (
+        {can('create_provider_service') && (
           <Button
             variant="contained"
             color="primary"
