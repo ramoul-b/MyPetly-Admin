@@ -15,6 +15,7 @@ import ProviderDetails from '../pages/provider/ProviderDetails'
 import ServicesList from '../pages/service/ServicesList'
 import ServiceForm from '../pages/service/ServiceForm'
 import ServiceDetails from '../pages/service/ServiceDetails'
+import MyServicesList from '../pages/providerServices/MyServicesList'
 import CategoriesList from '../pages/category/CategoriesList'
 import CategoryForm from '../pages/category/CategoryForm'
 import CategoryDetails from '../pages/category/CategoryDetails'
@@ -31,6 +32,13 @@ import BookingCalendar from '../pages/bookings/BookingCalendar'
 import CollarsList from '../pages/collar/CollarsList'
 import CollarForm from '../pages/collar/CollarForm'
 import CollarDetails from '../pages/collar/CollarDetails'
+import useAuth from '../modules/auth/useAuth'
+
+function ServicesIndex() {
+  const { can } = useAuth()
+  if (can('view_any_service')) return <ServicesList />
+  return <RequirePerm allowed="view_own_service"><MyServicesList /></RequirePerm>
+}
 
 
 
@@ -73,7 +81,7 @@ export default [
       {
         path: 'services',
         children: [
-          { index: true, element: <RequirePerm allowed="view_any_service"><ServicesList /></RequirePerm> },
+          { index: true, element: <ServicesIndex /> },
           { path: 'create', element: <RequirePerm allowed="create_service"><ServiceForm /></RequirePerm> },
           { path: ':id/edit', element: <RequirePerm allowed="edit_any_service"><ServiceForm /></RequirePerm> },
           { path: ':id', element: <RequirePerm allowed="view_any_service"><ServiceDetails /></RequirePerm> }

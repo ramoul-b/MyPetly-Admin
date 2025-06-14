@@ -18,6 +18,7 @@
     "add_animal": "Add",
     "add_provider": "Add",
     "add_service": "Add",
+    "add_provider_service": "Add",
     "add_role": "Add",
     "add_permission": "Add",
     "edit": "Edit",
@@ -34,7 +35,8 @@
     "roles": "Roles",
     "permissions": "Permissions",
     "collars": "Collars",
-    "categories": "Categories"
+    "categories": "Categories",
+    "my_services": "My Services"
 
   },
   "roles": {
