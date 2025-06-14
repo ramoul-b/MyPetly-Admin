@@ -1,7 +1,7 @@
 // src/modules/auth/RequireAuth.jsx
 import { useSelector } from 'react-redux' 
 import { Navigate, useLocation } from 'react-router-dom'
-import { useAuthContext } from './AuthProvider'
+import { useAuthContext } from './authContext'
 import AuthLoader from '../../components/AuthLoader' 
 
 
