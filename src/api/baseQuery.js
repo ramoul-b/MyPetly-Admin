@@ -7,6 +7,7 @@ const rawBaseQuery = fetchBaseQuery({
   prepareHeaders: (h) => {
     const t = localStorage.getItem('access_token')
     if (t) h.set('authorization', `Bearer ${t}`)
+    h.set('Accept', 'application/json')
     return h
   }
 })
