@@ -43,7 +43,7 @@ export default function CategoriesList() {
             <IconButton
               color="error"
               onClick={async () => {
-                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                   await deleteCategory(params.row.id)
                   refetch()
                 }

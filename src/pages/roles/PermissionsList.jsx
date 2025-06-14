@@ -34,7 +34,7 @@ export default function PermissionsList () {
             <IconButton
               color="error"
               onClick={async () => {
-                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                   await deletePermission(params.row.id)
                   refetch()
                 }

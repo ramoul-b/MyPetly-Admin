@@ -182,7 +182,7 @@ export default function ${Modules}List () {
           <IconButton
             color="error"
             onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+              if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                 await delete${Module}(params.row.id)
                 refetch()
               }

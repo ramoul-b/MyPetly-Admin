@@ -46,7 +46,7 @@ export default function AnimalsList () {
             <IconButton
               color="error"
               onClick={async () => {
-                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                   await deleteAnimal(params.row.id)
                   refetch()
                 }

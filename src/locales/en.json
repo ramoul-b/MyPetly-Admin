@@ -49,9 +49,7 @@
     "table": {
     "actions": "Actions"
   },
-    "confirm": {
-    "delete": "Confirm deletion?"
-  },
+    "confirm_delete": "Confirm deletion?",
   "animal": {
     "name": "Nom",
     "species": "Espèce",

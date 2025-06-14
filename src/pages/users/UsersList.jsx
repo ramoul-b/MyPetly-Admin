@@ -46,7 +46,7 @@ export default function UsersList () {
             <IconButton
               color="error"
               onClick={async () => {
-                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                if (window.confirm(t('confirm_delete', 'Supprimer ?'))) {
                   await deleteUser(params.row.id)
                   refetch()
                 }

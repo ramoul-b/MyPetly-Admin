@@ -57,7 +57,7 @@ export default function MyServicesList() {
           )}
           {can('delete_own_provider_service') && (
             <IconButton color="error" onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Confirm deletion?'))) {
+              if (window.confirm(t('confirm_delete', 'Confirm deletion?'))) {
                 await deleteService(params.row.id)
                 refetch()
               }
