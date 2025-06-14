@@ -32,7 +32,6 @@ const menu = [
   { label: 'Providers', path: '/providers', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Services', path: '/services', icon: <MiscellaneousServicesIcon />, permissions: ['view_any_service', 'view_own_service'] },
   { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['view_any_category', 'view_own_category'] },
-  { label: 'My services', path: '/my-services', icon: <MiscellaneousServicesIcon />, roles: ['provider'] },
   { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
   { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
   { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['view_any_booking', 'view_own_booking'] }
@@ -59,7 +58,6 @@ const pageTitles = {
   '/providers': t('page.providers', 'Providers'),
   '/services': t('page.services', 'Services'),
   '/categories': t('page.categories', 'Categories'),
-  '/my-services': t('page.my_services', 'My services'),
   '/users': t('page.users', 'Users'),
   '/roles': t('page.roles', 'Roles'),
   '/permissions': t('page.permissions', 'Permissions'),
