@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import useAnimals from '../../modules/animals/useAnimals'
 import { useState } from 'react'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function CollarsList() {
   const [animal, setAnimal] = useState('')
@@ -16,6 +17,7 @@ export default function CollarsList() {
   const { collars, isLoading, refetch } = useCollars(animal ? { animal_id: animal } : undefined)
   const [deleteCollar] = useDeleteCollarMutation()
   const nav = useNavigate()
+  const { can } = useAuth()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -30,20 +32,24 @@ export default function CollarsList() {
           <IconButton color="info" onClick={() => nav(`/collars/${params.row.id}`)}>
             <VisibilityIcon />
           </IconButton>
-          <IconButton color="primary" onClick={() => nav(`/collars/${params.row.id}/edit`)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            color="error"
-            onClick={async () => {
-              if (window.confirm('Delete?')) {
-                await deleteCollar(params.row.id)
-                refetch()
-              }
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {can('collars.edit') && (
+            <IconButton color="primary" onClick={() => nav(`/collars/${params.row.id}/edit`)}>
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('collars.delete') && (
+            <IconButton
+              color="error"
+              onClick={async () => {
+                if (window.confirm('Delete?')) {
+                  await deleteCollar(params.row.id)
+                  refetch()
+                }
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -65,15 +71,17 @@ export default function CollarsList() {
             <MenuItem key={a.id} value={a.id}>{a.name}</MenuItem>
           ))}
         </TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/collars/create')}
-        >
-          Add
-        </Button>
+        {can('collars.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/collars/create')}
+          >
+            Add
+          </Button>
+        )}
       </Box>
       <Box
         sx={{

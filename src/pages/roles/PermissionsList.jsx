@@ -7,12 +7,14 @@ import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'react-i18next'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function PermissionsList () {
   const { permissions, isLoading, refetch } = usePermissions()
   const [deletePermission] = useDeletePermissionMutation()
   const nav = useNavigate()
   const { t } = useTranslation()
+  const { can } = useAuth()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -23,20 +25,24 @@ export default function PermissionsList () {
       width: 150,
       renderCell: (params) => (
         <Box>
-          <IconButton color="primary" onClick={() => nav(`/permissions/${params.row.id}/edit`)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            color="error"
-            onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
-                await deletePermission(params.row.id)
-                refetch()
-              }
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {can('permissions.edit') && (
+            <IconButton color="primary" onClick={() => nav(`/permissions/${params.row.id}/edit`)}>
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('permissions.delete') && (
+            <IconButton
+              color="error"
+              onClick={async () => {
+                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                  await deletePermission(params.row.id)
+                  refetch()
+                }
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -45,15 +51,17 @@ export default function PermissionsList () {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/permissions/create')}
-        >
-          {t('button.add_permission', 'Add')}
-        </Button>
+        {can('permissions.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/permissions/create')}
+          >
+            {t('button.add_permission', 'Add')}
+          </Button>
+        )}
       </Box>
       <Box
         sx={{

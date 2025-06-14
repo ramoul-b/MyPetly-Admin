@@ -12,6 +12,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded'
+import useAuth from '../../modules/auth/useAuth'
 
 
 export default function ServicesList () {
@@ -21,6 +22,7 @@ export default function ServicesList () {
   const [deleteService] = useDeleteServiceMutation()
   const nav = useNavigate()
   const { t, i18n } = useTranslation()
+  const { can } = useAuth()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -50,20 +52,24 @@ export default function ServicesList () {
           <IconButton color="info" onClick={() => nav(`/services/${params.row.id}`)}>
             <VisibilityIcon />
           </IconButton>
-          <IconButton color="primary" onClick={() => nav(`/services/${params.row.id}/edit`)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            color="error"
-            onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
-                await deleteService(params.row.id)
-                refetch()
-              }
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {can('services.edit') && (
+            <IconButton color="primary" onClick={() => nav(`/services/${params.row.id}/edit`)}>
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('services.delete') && (
+            <IconButton
+              color="error"
+              onClick={async () => {
+                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                  await deleteService(params.row.id)
+                  refetch()
+                }
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -85,15 +91,17 @@ export default function ServicesList () {
             <MenuItem key={c.id} value={c.id}>{c.name?.[i18n.language] || c.name?.en}</MenuItem>
           ))}
         </TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/services/create')}
-        >
-          {t('button.add_service', 'Add')}
-        </Button>
+        {can('services.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/services/create')}
+          >
+            {t('button.add_service', 'Add')}
+          </Button>
+        )}
       </Box>
       <Box
         sx={{

@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useTranslation } from 'react-i18next'
+import useAuth from '../../modules/auth/useAuth'
 
 export default function ProvidersList() {
   const { providers, isLoading, refetch } = useProviders()
@@ -15,6 +16,7 @@ export default function ProvidersList() {
   const nav = useNavigate()
   const { t } = useTranslation()
   const { i18n } = useTranslation()
+  const { can } = useAuth()
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -36,20 +38,24 @@ export default function ProvidersList() {
           <IconButton color="info" onClick={() => nav(`/providers/${params.row.id}`)}>
             <VisibilityIcon />
           </IconButton>
-          <IconButton color="primary" onClick={() => nav(`/providers/${params.row.id}/edit`)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            color="error"
-            onClick={async () => {
-              if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
-                await deleteProvider(params.row.id)
-                refetch()
-              }
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
+          {can('providers.edit') && (
+            <IconButton color="primary" onClick={() => nav(`/providers/${params.row.id}/edit`)}>
+              <EditIcon />
+            </IconButton>
+          )}
+          {can('providers.delete') && (
+            <IconButton
+              color="error"
+              onClick={async () => {
+                if (window.confirm(t('confirm.delete', 'Supprimer ?'))) {
+                  await deleteProvider(params.row.id)
+                  refetch()
+                }
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </Box>
       )
     }
@@ -58,15 +64,17 @@ export default function ProvidersList() {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
-          onClick={() => nav('/providers/create')}
-        >
-          {t('button.add_provider', 'Add')}
-        </Button>
+        {can('providers.create') && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+            onClick={() => nav('/providers/create')}
+          >
+            {t('button.add_provider', 'Add')}
+          </Button>
+        )}
       </Box>
       <Box
         sx={{
