@@ -1,48 +1,20 @@
 {
-    "login": {
-      "title": "Accesso",
-      "email": "Email",
-      "password": "Password",
-      "show": "Mostra",
-      "hide": "Nascondi",
-      "submit": "Accedi",
-      "error": "Errore"
-    },
-    "access": {
+  "login": {
+    "title": "Accesso",
+    "email": "Email",
+    "password": "Password",
+    "show": "Mostra",
+    "hide": "Nascondi",
+    "submit": "Accedi",
+    "error": "Errore"
+  },
+  "access": {
     "forbidden": "Accesso negato"
-    },
-    "button": {
-      "logout": "Disconnetti",
-      "profile": "Profilo"
-    },
-    "page": {
-      "not_found": "Pagina non trovata"
-    },
-    "roles": {
-    "super_admin": "Super Amministratore",
-    "admin": "Amministratore",
-    "manager": "Manager",
-    "moderator": "Moderatore",
-    "provider": "Fornitore",
-    "support": "Supporto"
   },
   "button": {
-    "language": "Lingua"
-  },
-  "page": {
-  "dashboard": "Dashboard",
-  "animals": "Animali",
-  "users": "Utenti",
-  "profile": "Il mio profilo",
-  "providers": "Fornitori",
-  "services": "Servizi",
-  "roles": "Ruoli",
-  "permissions": "Permessi",
-  "collars": "Collari",
-  "categories": "Categorie",
-  "my_services": "I miei servizi"
-  },
-  "button": {
+    "logout": "Disconnetti",
+    "language": "Lingua",
+    "profile": "Il mio profilo",
     "add_animal": "Aggiungi",
     "add_provider": "Aggiungi",
     "add_service": "Aggiungi",
@@ -50,7 +22,31 @@
     "add_role": "Aggiungi",
     "add_permission": "Aggiungi",
     "edit": "Modifica",
-    "delete": "Elimina"
+    "delete": "Elimina",
+    "save": "Salva",
+    "cancel": "Annulla"
+  },
+  "page": {
+    "not_found": "Pagina non trovata",
+    "dashboard": "Dashboard",
+    "animals": "Animali",
+    "users": "Utenti",
+    "profile": "Il mio profilo",
+    "providers": "Fornitori",
+    "services": "Servizi",
+    "roles": "Ruoli",
+    "permissions": "Permessi",
+    "collars": "Collari",
+    "categories": "Categorie",
+    "my_services": "I miei servizi"
+  },
+  "roles": {
+    "super_admin": "Super Amministratore",
+    "admin": "Amministratore",
+    "manager": "Manager",
+    "moderator": "Moderatore",
+    "provider": "Fornitore",
+    "support": "Supporto"
   },
   "table": {
     "actions": "Azioni"
@@ -70,11 +66,6 @@
     "status.active": "Actif",
     "status.lost": "Perdu",
     "birthdate": "Date de naissance"
-  },
-  "button": {
-    "save": "Salva",
-    "profile": "Il mio profilo",
-    "cancel": "Annulla"
   },
   "profile": {
     "title": "Il mio profilo"
@@ -147,4 +138,3 @@
     "provider_required": "Fornitore richiesto"
   }
 }
-  

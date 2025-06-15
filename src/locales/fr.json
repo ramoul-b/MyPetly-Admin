@@ -1,22 +1,44 @@
 {
-    "login": {
-      "title": "Connexion",
-      "email": "Email",
-      "password": "Mot de passe",
-      "show": "Afficher",
-      "hide": "Masquer",
-      "submit": "Se connecter",
-      "error": "Erreur"
-    },
+  "login": {
+    "title": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "submit": "Se connecter",
+    "error": "Erreur"
+  },
   "access": {
     "forbidden": "Accès interdit"
   },
   "button": {
     "logout": "Déconnexion",
-    "profile": "Profil"
+    "language": "Langue",
+    "profile": "Mon profil",
+    "add_animal": "Ajouter",
+    "add_provider": "Ajouter",
+    "add_service": "Ajouter",
+    "add_provider_service": "Ajouter",
+    "add_role": "Ajouter",
+    "add_permission": "Ajouter",
+    "edit": "Éditer",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "cancel": "Annuler"
   },
   "page": {
-    "not_found": "Page introuvable"
+    "not_found": "Page introuvable",
+    "dashboard": "Tableau de bord",
+    "animals": "Animaux",
+    "users": "Utilisateurs",
+    "profile": "Mon profil",
+    "providers": "Prestataires",
+    "services": "Services",
+    "roles": "Rôles",
+    "permissions": "Permissions",
+    "collars": "Colliers",
+    "categories": "Catégories",
+    "my_services": "Mes services"
   },
   "roles": {
     "super_admin": "Super Administrateur",
@@ -25,32 +47,6 @@
     "moderator": "Modérateur",
     "provider": "Prestataire",
     "support": "Support"
-  },
-  "button": {
-    "language": "Langue"
-  },
-  "page": {
-  "dashboard": "Tableau de bord",
-  "animals": "Animaux",
-  "users": "Utilisateurs",
-  "profile": "Mon profil",
-  "providers": "Prestataires",
-  "services": "Services",
-  "roles": "Rôles",
-  "permissions": "Permissions",
-  "collars": "Colliers",
-  "categories": "Catégories",
-  "my_services": "Mes services"
-  },
-  "button": {
-    "add_animal": "Ajouter",
-    "add_provider": "Ajouter",
-    "add_service": "Ajouter",
-    "add_provider_service": "Ajouter",
-    "add_role": "Ajouter",
-    "add_permission": "Ajouter",
-    "edit": "Éditer",
-    "delete": "Supprimer"
   },
   "table": {
     "actions": "Actions"
@@ -70,11 +66,6 @@
     "status.active": "Actif",
     "status.lost": "Perdu",
     "birthdate": "Date de naissance"
-  },
-  "button": {
-    "save": "Enregistrer",
-    "profile": "Mon profil",
-    "cancel": "Annuler"
   },
   "profile": {
     "title": "Mon profil",
@@ -97,8 +88,8 @@
     "delete": "Supprimer mon compte",
     "confirm_deactivation": "Confirmer la désactivation ?",
     "confirm_delete": "Confirmer la suppression du compte ?"
-  }
-  ,"provider": {
+  },
+  "provider": {
     "name": "Nom",
     "email": "Email",
     "phone": "Téléphone",
@@ -151,4 +142,3 @@
     "provider_required": "Prestataire requis"
   }
 }
-  
