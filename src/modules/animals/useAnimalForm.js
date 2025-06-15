@@ -15,7 +15,14 @@ export default function useAnimalForm(id) {
     if (id) {
       await updateAnimal({ id, ...values }).unwrap()
     } else {
-      await addAnimal(values).unwrap()
+      const res = await addAnimal(values).unwrap()
+      const newId = res?.id || res?.animal?.id
+      if (newId) {
+        nav(`/animals/${newId}`)
+        return
+      }
+      nav('/animals')
+      return
     }
     nav(`/animals/${id}`)
   }
