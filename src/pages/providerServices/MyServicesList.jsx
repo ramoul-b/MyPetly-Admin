@@ -17,7 +17,7 @@ import ProviderServiceForm from './ProviderServiceForm'
 export default function MyServicesList() {
   const { t, i18n } = useTranslation()
   const nav = useNavigate()
-  const { can } = useAuth()
+  const { can, user } = useAuth()
   const { data: providerServices = [], isLoading, refetch } = useListProviderServicesQuery()
   const [deleteService] = useDeleteProviderServiceMutation()
   const [editing, setEditing] = useState(null)
@@ -102,6 +102,7 @@ export default function MyServicesList() {
           open={open}
           onClose={async (saved) => { setOpen(false); if (saved) await refetch() }}
           initial={editing}
+          providerId={user.provider_id}
         />
       )}
     </Stack>
