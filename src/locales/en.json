@@ -132,7 +132,8 @@
   "provider_service": {
     "price": "Price",
     "duration": "Duration",
-    "available": "Available"
+    "available": "Available",
+    "no_provider": "Provider not specified"
   },
   "errors": {
     "unauthorized_action": "You are not authorized to perform this action.",

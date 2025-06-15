@@ -139,9 +139,9 @@
   "provider_service": {
     "price": "Prezzo",
     "duration": "Durata",
-    "available": "Disponibile"
-  }
- ,
+    "available": "Disponibile",
+    "no_provider": "Fornitore non specificato"
+  },
   "errors": {
     "unauthorized_action": "Non sei autorizzato a eseguire questa azione.",
     "provider_required": "Fornitore richiesto"
