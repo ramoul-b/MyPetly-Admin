@@ -41,6 +41,7 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
   const handleSubmit = async () => {
     const finalProviderId = initial?.provider_id || user.provider_id
     const payload = { ...values, provider_id: finalProviderId }
+    console.log('Payload POST:', payload)
     try {
       if (initial && initial.id) {
         await updateService({ id: initial.id, ...payload }).unwrap()
