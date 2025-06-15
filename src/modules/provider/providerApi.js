@@ -13,6 +13,9 @@ export const providerApi = createApi({
     getProvider: b.query({
       query: (id) => `providers/${id}`
     }),
+    getProviderByUser: b.query({
+      query: (userId) => `providers/by-user/${userId}`
+    }),
     addProvider: b.mutation({
       query: (body) => ({ url: 'providers', method: 'POST', body }),
       invalidatesTags: ['Provider']
@@ -48,6 +51,7 @@ export const providerApi = createApi({
 export const {
   useListProvidersQuery,
   useGetProviderQuery,
+  useGetProviderByUserQuery,
   useAddProviderMutation,
   useUpdateProviderMutation,
   useDeleteProviderMutation,
