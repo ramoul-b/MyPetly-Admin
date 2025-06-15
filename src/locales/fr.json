@@ -38,7 +38,8 @@
     "permissions": "Permissions",
     "collars": "Colliers",
     "categories": "Catégories",
-    "my_services": "Mes services"
+    "my_services": "Mes services",
+    "my_bookings": "Mes réservations"
   },
   "roles": {
     "super_admin": "Super Administrateur",
@@ -130,6 +131,24 @@
     "edit_title": "Modifier la permission",
     "save_error": "Erreur lors de l'enregistrement",
     "name": "Nom"
+  },
+  "booking": {
+    "add_title": "Ajouter une réservation",
+    "edit_title": "Modifier une réservation",
+    "animal": "Animal",
+    "user": "Utilisateur",
+    "service": "Service",
+    "provider": "Prestataire",
+    "date": "Date",
+    "time": "Heure",
+    "payment_status": "Paiement",
+    "payment_intent": "Intent de paiement",
+    "currency": "Devise",
+    "details": "Voir le détail",
+    "calendar": "Agenda des réservations",
+    "untitled": "Réservation",
+    "saved": "Réservation enregistrée !",
+    "save_error": "Erreur lors de l'enregistrement"
   },
   "provider_service": {
     "price": "Prix",
