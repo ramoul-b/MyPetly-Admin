@@ -34,7 +34,7 @@ export default function AnimalsList () {
       >
         <Visibility />
       </IconButton>
-          {can('animals.edit') && (
+          {can('edit_any_animal') && (
             <IconButton
               color="primary"
               onClick={() => nav(`/animals/${params.row.id}/edit`)}
@@ -42,7 +42,7 @@ export default function AnimalsList () {
               <EditIcon />
             </IconButton>
           )}
-          {can('animals.delete') && (
+          {can('delete_animal') && (
             <IconButton
               color="error"
               onClick={async () => {
@@ -63,7 +63,7 @@ export default function AnimalsList () {
   return (
     <Stack spacing={2}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
-        {can('animals.create') && (
+        {can('create_animal') && (
           <Button
             variant="contained"
             color="primary"
