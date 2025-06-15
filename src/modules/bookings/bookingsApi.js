@@ -7,7 +7,10 @@ export const bookingsApi = createApi({
   tagTypes: ['Booking'],
   endpoints: (b) => ({
     listBookings: b.query({
-      query: () => 'bookings',
+      query: (params) => {
+        const query = params ? `?${new URLSearchParams(params).toString()}` : ''
+        return `bookings${query}`
+      },
       providesTags: ['Booking']
     }),
     getBooking: b.query({

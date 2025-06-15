@@ -30,6 +30,7 @@ import BookingsList from '../pages/bookings/BookingsList'
 import BookingForm from '../pages/bookings/BookingForm'
 import BookingDetails from '../pages/bookings/BookingDetails'
 import BookingCalendar from '../pages/bookings/BookingCalendar'
+import MyBookingsList from '../pages/bookings/MyBookingsList'
 import CollarsList from '../pages/collar/CollarsList'
 import CollarForm from '../pages/collar/CollarForm'
 import CollarDetails from '../pages/collar/CollarDetails'
@@ -157,6 +158,10 @@ export default [
       {
   path: 'my-services',
   element: <RequirePerm allowed="view_own_provider_service"><MyServicesList /></RequirePerm>
+},
+{
+  path: 'my-bookings',
+  element: <RequirePerm allowed="view_own_booking"><MyBookingsList /></RequirePerm>
 },
 
       {

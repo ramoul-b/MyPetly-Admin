@@ -37,7 +37,9 @@
     "permissions": "Permissions",
     "collars": "Collars",
     "categories": "Categories",
-    "my_services": "My Services"
+    "my_services": "My Services",
+    "bookings": "Bookings",
+    "my_bookings": "My Bookings"
   },
   "roles": {
     "super_admin": "Super Admin",
