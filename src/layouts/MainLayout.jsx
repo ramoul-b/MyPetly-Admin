@@ -38,7 +38,15 @@ export default function MainLayout() {
 
   const servicesPath = is('super_admin') || is('admin')
   ? '/services'
-  : '/my-services'  
+  : '/my-services'
+
+  const bookingsLabel = is('super_admin') || is('admin')
+    ? t('page.bookings', 'Bookings')
+    : t('page.my_bookings', 'My Bookings')
+
+  const bookingsPath = is('super_admin') || is('admin')
+    ? '/bookings'
+    : '/my-bookings'
 
   const menu = [
     { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
@@ -50,7 +58,7 @@ export default function MainLayout() {
     { label: 'Categories', path: '/categories', icon: <CategoryIcon />, permissions: ['view_any_category', 'view_own_category'] },
     { label: 'Roles', path: '/roles', icon: <PeopleIcon />, roles: ['super_admin'] },
     { label: 'Permissions', path: '/permissions', icon: <BusinessIcon />, roles: ['super_admin'] },
-    { label: 'Bookings', path: '/bookings', icon: <ScheduleIcon />, permissions: ['view_any_booking', 'view_own_booking'] }
+    { label: bookingsLabel, path: bookingsPath, icon: <ScheduleIcon />, permissions: ['view_any_booking', 'view_own_booking'] }
   ]
 
   const allowedMenu = useMemo(
@@ -72,6 +80,7 @@ const pageTitles = {
   '/roles': t('page.roles', 'Roles'),
   '/permissions': t('page.permissions', 'Permissions'),
   '/bookings': t('page.bookings', 'Bookings'),
+  '/my-bookings': t('page.my_bookings', 'My Bookings'),
 }
 
 const pageTitle = pageTitles[pathname] || 'MyPetly Admin'
