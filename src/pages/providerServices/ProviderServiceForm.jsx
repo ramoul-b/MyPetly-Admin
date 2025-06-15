@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
-  TextField, MenuItem, Button, Switch, FormControlLabel
+  TextField, MenuItem, Button, Switch, FormControlLabel, Alert
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import {
@@ -9,15 +9,20 @@ import {
   useUpdateProviderServiceMutation
 } from '../../modules/providerServices/providerServicesApi'
 import { useListServicesQuery } from '../../modules/services/servicesApi'
+import { useListProvidersQuery } from '../../modules/provider/providerApi'
 import useAuth from '../../modules/auth/useAuth'
 
-export default function ProviderServiceForm({ open, onClose, initial }) {
+export default function ProviderServiceForm({ open, onClose, initial, providerId }) {
   const { t, i18n } = useTranslation()
-  const { user } = useAuth()
+  const { user, is } = useAuth()
   const { data: services = [] } = useListServicesQuery()
+  const { data: providers = [] } = useListProvidersQuery(undefined, { skip: !(is('admin') || is('super_admin')) })
   const [addService] = useAddProviderServiceMutation()
   const [updateService] = useUpdateProviderServiceMutation()
-  const [values, setValues] = useState({ service_id: '', price: '', duration: '', available: true })
+  const [values, setValues] = useState({ service_id: '', price: '', duration: '', available: true, provider_id: '' })
+  const [error, setError] = useState(null)
+  const finalProviderId = providerId || values.provider_id || initial?.provider_id || user.provider_id
+  const canSubmit = !!finalProviderId
 
   useEffect(() => {
     if (initial) {
@@ -26,12 +31,18 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
         price: initial.price || '',
         duration: initial.duration || '',
         available: !!initial.available,
-        provider_id: initial.provider_id
+        provider_id: providerId || initial.provider_id || user.provider_id || ''
       })
     } else {
-      setValues({ service_id: '', price: '', duration: '', available: true })
+      setValues({
+        service_id: '',
+        price: '',
+        duration: '',
+        available: true,
+        provider_id: providerId || user.provider_id || ''
+      })
     }
-  }, [initial])
+  }, [initial, providerId, user.provider_id])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -39,7 +50,11 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
   }
 
   const handleSubmit = async () => {
-    const finalProviderId = initial?.provider_id || user.provider_id
+    const finalProviderId = providerId || values.provider_id || initial?.provider_id || user.provider_id
+    if (!finalProviderId) {
+      setError(t('provider_service.no_provider', 'Provider not specified'))
+      return
+    }
     const payload = { ...values, provider_id: finalProviderId }
     console.log('Payload POST:', payload)
     try {
@@ -75,6 +90,25 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
             </MenuItem>
           ))}
         </TextField>
+        {(is('admin') || is('super_admin')) && (
+          <TextField
+            select
+            fullWidth
+            margin="normal"
+            label={t('provider.name', 'Provider')}
+            name="provider_id"
+            value={values.provider_id}
+            onChange={handleChange}
+          >
+            {providers.map(p => (
+              <MenuItem key={p.id} value={p.id}>
+                {typeof p.name === 'object'
+                  ? p.name[i18n.language] || p.name.en || Object.values(p.name)[0]
+                  : p.name}
+              </MenuItem>
+            ))}
+          </TextField>
+        )}
         <TextField
           fullWidth
           margin="normal"
@@ -97,10 +131,20 @@ export default function ProviderServiceForm({ open, onClose, initial }) {
           control={<Switch checked={values.available} onChange={e => handleChange({ target: { name: 'available', type: 'checkbox', checked: e.target.checked } })} />}
           label={t('provider_service.available', 'Available')}
         />
+        {!canSubmit && (
+          <Alert severity="error" sx={{ mt: 1 }}>
+            {t('provider_service.no_provider', 'Provider not specified')}
+          </Alert>
+        )}
+        {error && (
+          <Alert severity="error" sx={{ mt: 1 }}>
+            {error}
+          </Alert>
+        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={() => onClose(false)}>{t('button.cancel', 'Cancel')}</Button>
-        <Button variant="contained" onClick={handleSubmit}>{t('button.save', 'Save')}</Button>
+        <Button variant="contained" onClick={handleSubmit} disabled={!canSubmit}>{t('button.save', 'Save')}</Button>
       </DialogActions>
     </Dialog>
   )
