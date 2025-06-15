@@ -135,6 +135,7 @@
     "available": "Available"
   },
   "errors": {
-    "unauthorized_action": "You are not authorized to perform this action."
+    "unauthorized_action": "You are not authorized to perform this action.",
+    "provider_required": "Provider required"
   }
   }

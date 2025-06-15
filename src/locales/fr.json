@@ -147,7 +147,8 @@
   }
  ,
   "errors": {
-    "unauthorized_action": "Vous n'êtes pas autorisé à effectuer cette action."
+    "unauthorized_action": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "provider_required": "Prestataire requis"
   }
- }
+}
   
