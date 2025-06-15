@@ -14,7 +14,7 @@
   "button": {
     "logout": "Logout",
     "language": "Language",
-    "profile": "Profile",
+    "profile": "My Profile",
     "add_animal": "Add",
     "add_provider": "Add",
     "add_service": "Add",
@@ -23,6 +23,7 @@
     "add_permission": "Add",
     "edit": "Edit",
     "delete": "Delete",
+    "save": "Save",
     "cancel": "Cancel"
   },
   "page": {
@@ -64,10 +65,6 @@
     "status.active": "Active",
     "status.lost": "Lost",
     "birthdate": "Birthdate"
-  },
-  "button": {
-    "save": "Save",
-    "profile": "My Profile"
   },
   "profile": {
     "title": "My Profile"
