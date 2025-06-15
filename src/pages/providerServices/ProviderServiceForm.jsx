@@ -56,7 +56,7 @@ export default function ProviderServiceForm({ open, onClose, initial, providerId
       return
     }
     const payload = { ...values, provider_id: finalProviderId }
-    console.log('Payload POST:', payload)
+    if (import.meta.env.DEV) console.log('Payload POST:', payload)
     try {
       if (initial && initial.id) {
         await updateService({ id: initial.id, ...payload }).unwrap()
