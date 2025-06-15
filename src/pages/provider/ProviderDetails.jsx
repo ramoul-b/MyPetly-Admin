@@ -1,19 +1,25 @@
+import React, { useState } from 'react'
 import { Box, Typography, Stack, Button, Paper, IconButton } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import AddIcon from '@mui/icons-material/Add'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProviderQuery } from '../../modules/provider/providerApi'
 import useProviderServices from '../../modules/providerServices/useProviderServices'
+import ProviderServiceForm from '../providerServices/ProviderServiceForm'
 import { useTranslation } from 'react-i18next'
+import useAuth from '../../modules/auth/useAuth'
 
 
 export default function ProviderDetails() {
   const nav = useNavigate()
   const { id } = useParams()
   const { data, isLoading } = useGetProviderQuery(id)
-  const { providerServices, isLoading: loadingServices } = useProviderServices(id)
+  const { providerServices, isLoading: loadingServices, refetch } = useProviderServices(id)
   const { t } = useTranslation()
   const { i18n } = useTranslation()
+  const { is } = useAuth()
+  const [open, setOpen] = useState(false)
 
   if (isLoading) return <div>Loading...</div>
   if (!data) return <div>{t('provider.not_found', 'Not found')}</div>
@@ -40,6 +46,18 @@ export default function ProviderDetails() {
       <Typography variant="h6" sx={{ mt: 4, mb: 1 }}>
         {t('provider.services_offered', 'Services offered')}
       </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+        {(is('admin') || is('super_admin')) && (
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setOpen(true)}
+            sx={{ borderRadius: 3, fontWeight: 600, fontSize: 16, px: 3 }}
+          >
+            {t('button.add_provider_service', 'Add')}
+          </Button>
+        )}
+      </Box>
       <Paper sx={{ height: 400, p: 1 }}>
         <DataGrid
           rows={providerServices}
@@ -84,6 +102,16 @@ export default function ProviderDetails() {
           disableSelectionOnClick
         />
       </Paper>
+      {open && (
+        <ProviderServiceForm
+          open={open}
+          providerId={id}
+          onClose={async (saved) => {
+            setOpen(false)
+            if (saved) await refetch()
+          }}
+        />
+      )}
     </Box>
   )
 }
