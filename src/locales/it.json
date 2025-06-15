@@ -143,7 +143,8 @@
   }
  ,
   "errors": {
-    "unauthorized_action": "Non sei autorizzato a eseguire questa azione."
+    "unauthorized_action": "Non sei autorizzato a eseguire questa azione.",
+    "provider_required": "Fornitore richiesto"
   }
- }
+}
   
