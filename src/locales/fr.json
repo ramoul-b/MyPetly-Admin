@@ -143,9 +143,9 @@
   "provider_service": {
     "price": "Prix",
     "duration": "Durée",
-    "available": "Disponible"
-  }
- ,
+    "available": "Disponible",
+    "no_provider": "Prestataire non spécifié"
+  },
   "errors": {
     "unauthorized_action": "Vous n'êtes pas autorisé à effectuer cette action.",
     "provider_required": "Prestataire requis"
