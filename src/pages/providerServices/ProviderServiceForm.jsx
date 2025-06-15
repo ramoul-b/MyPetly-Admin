@@ -10,6 +10,7 @@ import {
 } from '../../modules/providerServices/providerServicesApi'
 import { useListServicesQuery } from '../../modules/services/servicesApi'
 import { useListProvidersQuery } from '../../modules/provider/providerApi'
+import useOwnProviderId from '../../modules/provider/useOwnProviderId'
 import useAuth from '../../modules/auth/useAuth'
 
 export default function ProviderServiceForm({ open, onClose, initial, providerId }) {
@@ -17,11 +18,17 @@ export default function ProviderServiceForm({ open, onClose, initial, providerId
   const { user, is } = useAuth()
   const { data: services = [] } = useListServicesQuery()
   const { data: providers = [] } = useListProvidersQuery(undefined, { skip: !(is('admin') || is('super_admin')) })
+  const autoProviderId = useOwnProviderId()
   const [addService] = useAddProviderServiceMutation()
   const [updateService] = useUpdateProviderServiceMutation()
   const [values, setValues] = useState({ service_id: '', price: '', duration: '', available: true, provider_id: '' })
   const [error, setError] = useState(null)
-  const finalProviderId = providerId || values.provider_id || initial?.provider_id || user.provider_id
+  const finalProviderId =
+    providerId ||
+    values.provider_id ||
+    initial?.provider_id ||
+    user.provider_id ||
+    autoProviderId
   const canSubmit = !!finalProviderId
 
   useEffect(() => {
@@ -31,7 +38,7 @@ export default function ProviderServiceForm({ open, onClose, initial, providerId
         price: initial.price || '',
         duration: initial.duration || '',
         available: !!initial.available,
-        provider_id: providerId || initial.provider_id || user.provider_id || ''
+        provider_id: providerId || initial.provider_id || user.provider_id || autoProviderId || ''
       })
     } else {
       setValues({
@@ -39,10 +46,10 @@ export default function ProviderServiceForm({ open, onClose, initial, providerId
         price: '',
         duration: '',
         available: true,
-        provider_id: providerId || user.provider_id || ''
+        provider_id: providerId || user.provider_id || autoProviderId || ''
       })
     }
-  }, [initial, providerId, user.provider_id])
+  }, [initial, providerId, user.provider_id, autoProviderId])
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -50,7 +57,12 @@ export default function ProviderServiceForm({ open, onClose, initial, providerId
   }
 
   const handleSubmit = async () => {
-    const finalProviderId = providerId || values.provider_id || initial?.provider_id || user.provider_id
+    const finalProviderId =
+      providerId ||
+      values.provider_id ||
+      initial?.provider_id ||
+      user.provider_id ||
+      autoProviderId
     if (!finalProviderId) {
       setError(t('provider_service.no_provider', 'Provider not specified'))
       return

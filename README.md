@@ -17,6 +17,6 @@ This project now includes an admin module to manage roles and permissions. It pr
 
 ## ProviderServiceForm
 
-The `ProviderServiceForm` component can optionally receive a `providerId` prop. When supplied, this identifier is used as the target provider for the created or updated service. If omitted, the form falls back to `initial.provider_id` then to the logged user `provider_id`. When no provider can be determined, the form displays an error and the save action is disabled.
+The `ProviderServiceForm` component can optionally receive a `providerId` prop. When supplied, this identifier is used as the target provider for the created or updated service. If omitted, the form falls back to `initial.provider_id` then to the logged user `provider_id`. If the user has no provider assigned, the form automatically looks up the provider whose `user_id` matches the logged user. When no provider can be determined, the form displays an error and the save action is disabled.
 
 Administrators (roles `admin` or `super_admin`) will see a dropdown list of available providers retrieved via `useListProvidersQuery` to easily select the desired provider.
