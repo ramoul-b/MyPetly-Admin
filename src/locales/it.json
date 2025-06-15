@@ -129,6 +129,24 @@
     "save_error": "Errore di salvataggio",
     "name": "Nome"
   },
+  "booking": {
+    "add_title": "Nuova prenotazione",
+    "edit_title": "Modifica prenotazione",
+    "animal": "Animale",
+    "user": "Utente",
+    "service": "Servizio",
+    "provider": "Fornitore",
+    "date": "Data",
+    "time": "Ora",
+    "payment_status": "Pagamento",
+    "payment_intent": "Intento di pagamento",
+    "currency": "Valuta",
+    "details": "Vedi dettagli",
+    "calendar": "Calendario prenotazioni",
+    "untitled": "Prenotazione",
+    "saved": "Prenotazione salvata!",
+    "save_error": "Errore di salvataggio"
+  },
   "provider_service": {
     "price": "Prezzo",
     "duration": "Durata",

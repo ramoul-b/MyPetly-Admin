@@ -128,6 +128,24 @@
     "save_error": "Save error",
     "name": "Name"
   },
+  "booking": {
+    "add_title": "New booking",
+    "edit_title": "Edit booking",
+    "animal": "Animal",
+    "user": "User",
+    "service": "Service",
+    "provider": "Provider",
+    "date": "Date",
+    "time": "Time",
+    "payment_status": "Payment",
+    "payment_intent": "Payment intent",
+    "currency": "Currency",
+    "details": "View details",
+    "calendar": "Booking Calendar",
+    "untitled": "Booking",
+    "saved": "Saved!",
+    "save_error": "Save error"
+  },
   "provider_service": {
     "price": "Price",
     "duration": "Duration",
